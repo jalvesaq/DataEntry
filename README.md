@@ -1,2 +1,4 @@
 # DataEntry
-Make it easier to enter questionnaire data
+
+R package to make it easier to enter questionnaire data.
+

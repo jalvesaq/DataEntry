@@ -1,0 +1,199 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DataEntry 0.1\n"
+"POT-Creation-Date: 2016-11-09 13:38\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "'%s' is not a valid numeric value."
+msgstr ""
+
+msgid "'%s' is not a valid integer value."
+msgstr ""
+
+msgid "Attributes"
+msgstr ""
+
+msgid "Name:"
+msgstr ""
+
+msgid "Label:"
+msgstr ""
+
+msgid "Class:"
+msgstr ""
+
+msgid "Set valid:"
+msgstr ""
+
+msgid "range"
+msgstr ""
+
+msgid "values"
+msgstr ""
+
+msgid "Valid range:"
+msgstr ""
+
+msgid "Min:"
+msgstr ""
+
+msgid "Max:"
+msgstr ""
+
+msgid "Valid values (one per line):"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "The variable name cannot be empty."
+msgstr ""
+
+msgid "The variable name cannot begin with a number."
+msgstr ""
+
+msgid "Invalid character in the variable name."
+msgstr ""
+
+msgid "The variable label must have at most 80 characters."
+msgstr ""
+
+msgid "Factors must have valid values defined."
+msgstr ""
+
+msgid "View and edit data"
+msgstr ""
+
+msgid "Edit row"
+msgstr ""
+
+msgid "Delete row"
+msgstr ""
+
+msgid "Add row"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Data exported to \"%s\""
+msgstr ""
+
+msgid "Type a name for the new project and click OK."
+msgstr ""
+
+msgid "Internal variable (created automatically)"
+msgstr ""
+
+msgid "Choose a project and click OK."
+msgstr ""
+
+msgid "New project"
+msgstr ""
+
+msgid "Open project"
+msgstr ""
+
+msgid "Export data"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Set variables"
+msgstr ""
+
+msgid "Edit data"
+msgstr ""
+
+msgid "Project options"
+msgstr ""
+
+msgid "Put valid values in dropdown list"
+msgstr ""
+
+msgid "Allow blank cells"
+msgstr ""
+
+msgid "Text representing missing values:"
+msgstr ""
+
+msgid "Application options"
+msgstr ""
+
+msgid "Backup when opening project"
+msgstr ""
+
+msgid "Keep only the last backups"
+msgstr ""
+
+msgid "Number of backups to keep:"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "Replace row"
+msgstr ""
+
+msgid "No row is selected."
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Replace"
+msgstr ""
+
+msgid "No cell might be left empty."
+msgstr ""
+
+msgid "The minimum value of '%s' is '%s'"
+msgstr ""
+
+msgid "The maximum value of '%s' is '%s'"
+msgstr ""
+
+msgid "Invalid value: '%s'. Valid values are:\n%s"
+msgstr ""
+
+msgid "Cannot delete 'id'."
+msgstr ""
+
+msgid "No variable is selected."
+msgstr ""
+
+msgid "Cannot move 'id'."
+msgstr ""
+
+msgid "Attributes of variables"
+msgstr ""
+
+msgid "Variables"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Valid values:"
+msgstr ""
+
+msgid "If necessary, type 'DataEntry()' to start the application again."
+msgstr ""
+
+msgid        "There is a duplicated value:\n%s"
+msgid_plural "There are duplicated values:\n%s"
+msgstr[0]    ""
+msgstr[1]    ""

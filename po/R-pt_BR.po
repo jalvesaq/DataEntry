@@ -1,0 +1,214 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DataEntry\n"
+"Report-Msgid-Bugs-To: https://github.com/jalvesaq/DataEntry/issues\n"
+"POT-Creation-Date: 2016-11-09 13:38\n"
+"PO-Revision-Date: 2016-11-09 13:45-0300\n"
+"Last-Translator: Jakson Aquino <jalvesaq@gmail.com>\n"
+"Language-Team: pt <pt@li.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "'%s' is not a valid numeric value."
+msgstr "'%s' não é um valor numérico válido."
+
+msgid "'%s' is not a valid integer value."
+msgstr "'%s' não é um valor inteiro válido."
+
+msgid "Attributes"
+msgstr "Atributos"
+
+msgid "Name:"
+msgstr "Nome:"
+
+msgid "Label:"
+msgstr "Rótulo:"
+
+msgid "Class:"
+msgstr "Classe:"
+
+msgid "Set valid:"
+msgstr "Configurar válidos:"
+
+msgid "range"
+msgstr "intervalo"
+
+msgid "values"
+msgstr "valores"
+
+msgid "Valid range:"
+msgstr "Intervalo válido:"
+
+msgid "Min:"
+msgstr "Mín:"
+
+msgid "Max:"
+msgstr "Máx:"
+
+msgid "Valid values (one per line):"
+msgstr "Valores válidos (um por linha):"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "The variable name cannot be empty."
+msgstr "O nome da variável não pode ser vazio."
+
+msgid "The variable name cannot begin with a number."
+msgstr "O nome da variável não pode ser vazio."
+
+msgid "Invalid character in the variable name."
+msgstr "Caractere inválido no nome da variável."
+
+msgid "The variable label must have at most 80 characters."
+msgstr "O rótulo da variável deve ter no máximo 80 caracteres."
+
+msgid "Factors must have valid values defined."
+msgstr "Factors devem ter valores definidos."
+
+msgid "View and edit data"
+msgstr "Ver e editar os dados"
+
+msgid "Edit row"
+msgstr "Editar linha"
+
+msgid "Delete row"
+msgstr "Deletar linha"
+
+msgid "Add row"
+msgstr "Adicionar linha"
+
+msgid "Close"
+msgstr "Fechar"
+
+msgid "Data exported to \"%s\""
+msgstr "Dados exportados para \"%s\""
+
+msgid "Type a name for the new project and click OK."
+msgstr "Digite um nome para o novo projeto e clique OK."
+
+msgid "Internal variable (created automatically)"
+msgstr "Variável interna (criada automaticamente)"
+
+msgid "Choose a project and click OK."
+msgstr "Escolha um projeto e clique OK."
+
+msgid "New project"
+msgstr "Novo projeto"
+
+msgid "Open project"
+msgstr "Abrir projeto"
+
+msgid "Export data"
+msgstr "Exportar dados"
+
+msgid "Options"
+msgstr "Opções"
+
+msgid "Set variables"
+msgstr "Configurar variáveis"
+
+msgid "Edit data"
+msgstr "Editar dados"
+
+msgid "Project options"
+msgstr "Opções do projeto"
+
+msgid "Put valid values in dropdown list"
+msgstr "Colocar valores válidos em lista clicável"
+
+msgid "Allow blank cells"
+msgstr "Permitir células em branco"
+
+msgid "Text representing missing values:"
+msgstr "Texto indicador de valores omissos:"
+
+msgid "Application options"
+msgstr "Opções do aplicativo"
+
+msgid "Backup when opening project"
+msgstr "Fazer cópia de segurança ao abrir o projeto"
+
+msgid "Keep only the last backups"
+msgstr "Manter apenas as últimas cópias de segurança"
+
+msgid "Number of backups to keep:"
+msgstr "Número de cópias de segurança a manter:"
+
+msgid "Default"
+msgstr "Padrão"
+
+msgid "Replace row"
+msgstr "Substituir linha"
+
+msgid "No row is selected."
+msgstr "Nenhuma linha está selecionada."
+
+msgid "Add"
+msgstr "Adicionar"
+
+msgid "Replace"
+msgstr "Substituir"
+
+msgid "No cell might be left empty."
+msgstr "Nenhuma célula pode ser deixada vazia."
+
+msgid "The minimum value of '%s' is '%s'"
+msgstr "O valor mínimo de '%s' é '%s'"
+
+msgid "The maximum value of '%s' is '%s'"
+msgstr "O valor máximo de '%s' é '%s'"
+
+msgid ""
+"Invalid value: '%s'. Valid values are:\n"
+"%s"
+msgstr ""
+"Valor inválido: '%s'. Valores válidos são:\n"
+"%s"
+
+msgid "Cannot delete 'id'."
+msgstr "Não é possível deletar o 'id'."
+
+msgid "No variable is selected."
+msgstr "Nenhuma variável está selecionada."
+
+msgid "Cannot move 'id'."
+msgstr "Não é possível mover o 'id'."
+
+msgid "Attributes of variables"
+msgstr "Atributos das variáveis"
+
+msgid "Variables"
+msgstr "Variáveis"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Delete"
+msgstr "Deletar"
+
+msgid "Valid values:"
+msgstr "Valores válidos:"
+
+msgid "If necessary, type 'DataEntry()' to start the application again."
+msgstr ""
+"Se necessário, digite 'DataEntry()' para iniciar o aplicativo novamente."
+
+msgid ""
+"There is a duplicated value:\n"
+"%s"
+msgid_plural ""
+"There are duplicated values:\n"
+"%s"
+msgstr[0] ""
+"Há um valor duplicado:\n"
+"%s"
+msgstr[1] ""
+"Há valores duplicados:\n"
+"%s"
