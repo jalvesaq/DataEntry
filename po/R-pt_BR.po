@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DataEntry\n"
 "Report-Msgid-Bugs-To: https://github.com/jalvesaq/DataEntry/issues\n"
-"POT-Creation-Date: 2016-11-09 13:38\n"
-"PO-Revision-Date: 2016-11-09 13:45-0300\n"
+"POT-Creation-Date: 2016-11-11 11:55\n"
+"PO-Revision-Date: 2016-11-11 10:25-0300\n"
 "Last-Translator: Jakson Aquino <jalvesaq@gmail.com>\n"
 "Language-Team: pt <pt@li.org>\n"
 "Language: pt_BR\n"
@@ -11,12 +11,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-msgid "'%s' is not a valid numeric value."
-msgstr "'%s' não é um valor numérico válido."
-
-msgid "'%s' is not a valid integer value."
-msgstr "'%s' não é um valor inteiro válido."
 
 msgid "Attributes"
 msgstr "Atributos"
@@ -72,6 +66,9 @@ msgstr "O rótulo da variável deve ter no máximo 80 caracteres."
 msgid "Factors must have valid values defined."
 msgstr "Factors devem ter valores definidos."
 
+msgid "You can enter data only after setting the variables."
+msgstr "Você só pode inserir dados depois de configurar as variáveis."
+
 msgid "View and edit data"
 msgstr "Ver e editar os dados"
 
@@ -89,15 +86,6 @@ msgstr "Fechar"
 
 msgid "Data exported to \"%s\""
 msgstr "Dados exportados para \"%s\""
-
-msgid "Type a name for the new project and click OK."
-msgstr "Digite um nome para o novo projeto e clique OK."
-
-msgid "Internal variable (created automatically)"
-msgstr "Variável interna (criada automaticamente)"
-
-msgid "Choose a project and click OK."
-msgstr "Escolha um projeto e clique OK."
 
 msgid "New project"
 msgstr "Novo projeto"
@@ -143,6 +131,9 @@ msgstr "Número de cópias de segurança a manter:"
 
 msgid "Default"
 msgstr "Padrão"
+
+msgid "Please, enter a positive integer number."
+msgstr "Por favor, digite um número inteiro positivo."
 
 msgid "Replace row"
 msgstr "Substituir linha"
@@ -195,6 +186,29 @@ msgstr "Deletar"
 
 msgid "Valid values:"
 msgstr "Valores válidos:"
+
+msgid "'%s' is not a valid numeric value."
+msgstr "'%s' não é um valor numérico válido."
+
+msgid "'%s' is not a valid integer value."
+msgstr "'%s' não é um valor inteiro válido."
+
+msgid "Could not find the directory for saving the application options."
+msgstr "Pasta para salvar as opções do aplicativo não encontrada."
+
+msgid ""
+"Could not create the directory \"%s\" for saving the application options."
+msgstr ""
+"Não foi possível criar a pasta \"%s\" para salvar as opções do aplicativo."
+
+msgid "Type a name for the new project and click OK."
+msgstr "Digite um nome para o novo projeto e clique OK."
+
+msgid "Internal variable (created automatically)"
+msgstr "Variável interna (criada automaticamente)"
+
+msgid "Choose a project and click OK."
+msgstr "Escolha um projeto e clique OK."
 
 msgid "If necessary, type 'DataEntry()' to start the application again."
 msgstr ""

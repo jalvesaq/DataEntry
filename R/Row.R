@@ -160,4 +160,3 @@ RowDlg <- function(newrow = TRUE)
     visible(DEenv$roww) <- TRUE
     focus(l[1, 2])
 }
-

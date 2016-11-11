@@ -6,6 +6,12 @@ UpdateDFView <- function()
 
 DataEntryDlg <- function(...)
 {
+    if(length(DEenv$VarAttr) < 2){
+        gmessage(gettext("You can enter data only after setting the variables.",
+                         domain = "R-DataEntry"), type = "warning")
+        return(invisible(NULL))
+    }
+
     if("dataw" %in% ls(DEenv)){
         focus(DEenv$dataw)
         return(invisible(NULL))
@@ -45,4 +51,3 @@ DataEntryDlg <- function(...)
     UpdateDFView()
     visible(DEenv$dataw) <- TRUE
 }
-

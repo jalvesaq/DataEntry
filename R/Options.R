@@ -5,6 +5,10 @@ OptionsDlg <- function(...)
         focus(DEenv$optw)
         return(invisible(NULL))
     }
+
+    if(is.null(DEenv$AppOpt))
+        GetAppOpt()
+
     onDestroy <- function(...)
     {
         rm(list = "optw", envir = DEenv)
@@ -58,14 +62,27 @@ OptionsDlg <- function(...)
 
     SetOptions <- function(...)
     {
-        DEenv$ProjOpt$droplist  <- svalue(droplist)
-        DEenv$ProjOpt$emptycell <- svalue(emptycell)
-        DEenv$ProjOpt$missv     <- svalue(missv)
+        if(!IsNumericInt(svalue(nbcks), "integer")){
+            focus(nbcks)
+            return(invisible(NULL))
+        }
+        if(as.integer(svalue(nbcks)) < 1){
+            gmessage(gettext("Please, enter a positive integer number.",
+                             domain = "R-DataEntry"), type = "warning")
+            focus(nbcks)
+            return(invisible(NULL))
+        }
+
+        if("VarAttr" %in% ls(DEenv)){
+            DEenv$ProjOpt$droplist  <- svalue(droplist)
+            DEenv$ProjOpt$emptycell <- svalue(emptycell)
+            DEenv$ProjOpt$missv     <- svalue(missv)
+            SaveProject()
+        }
         DEenv$AppOpt$bckopen    <- svalue(bckopen)
         DEenv$AppOpt$bcklast    <- svalue(bcklast)
-        DEenv$AppOpt$nbcks      <- svalue(nbcks)
+        DEenv$AppOpt$nbcks      <- as.integer(svalue(nbcks))
         SaveAppOpt()
-        SaveProject()
         dispose(DEenv$optw)
     }
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DataEntry 0.1\n"
-"POT-Creation-Date: 2016-11-09 13:38\n"
+"POT-Creation-Date: 2016-11-11 11:55\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9,12 +9,6 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-
-msgid "'%s' is not a valid numeric value."
-msgstr ""
-
-msgid "'%s' is not a valid integer value."
-msgstr ""
 
 msgid "Attributes"
 msgstr ""
@@ -70,6 +64,9 @@ msgstr ""
 msgid "Factors must have valid values defined."
 msgstr ""
 
+msgid "You can enter data only after setting the variables."
+msgstr ""
+
 msgid "View and edit data"
 msgstr ""
 
@@ -86,15 +83,6 @@ msgid "Close"
 msgstr ""
 
 msgid "Data exported to \"%s\""
-msgstr ""
-
-msgid "Type a name for the new project and click OK."
-msgstr ""
-
-msgid "Internal variable (created automatically)"
-msgstr ""
-
-msgid "Choose a project and click OK."
 msgstr ""
 
 msgid "New project"
@@ -140,6 +128,9 @@ msgid "Number of backups to keep:"
 msgstr ""
 
 msgid "Default"
+msgstr ""
+
+msgid "Please, enter a positive integer number."
 msgstr ""
 
 msgid "Replace row"
@@ -188,6 +179,27 @@ msgid "Delete"
 msgstr ""
 
 msgid "Valid values:"
+msgstr ""
+
+msgid "'%s' is not a valid numeric value."
+msgstr ""
+
+msgid "'%s' is not a valid integer value."
+msgstr ""
+
+msgid "Could not find the directory for saving the application options."
+msgstr ""
+
+msgid "Could not create the directory \"%s\" for saving the application options."
+msgstr ""
+
+msgid "Type a name for the new project and click OK."
+msgstr ""
+
+msgid "Internal variable (created automatically)"
+msgstr ""
+
+msgid "Choose a project and click OK."
 msgstr ""
 
 msgid "If necessary, type 'DataEntry()' to start the application again."

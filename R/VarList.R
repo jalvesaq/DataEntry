@@ -163,4 +163,3 @@ VarListDlg <- function(...)
     focus(DEenv$varw)
     visible(DEenv$varw) <- TRUE
 }
-

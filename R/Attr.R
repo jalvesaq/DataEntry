@@ -1,20 +1,4 @@
 
-IsNumericInt <- function(s, cls)
-{
-    ni <- try(as.numeric(s), silent = TRUE)
-    if(is.na(ni)){
-        gmessage(sprintf(gettext("'%s' is not a valid numeric value.",
-                                 domain = "R-DataEntry"), s), type = "warning")
-        return(FALSE)
-    }
-    if(cls == "integer" && ni != try(as.integer(s), silent = TRUE)){
-        gmessage(sprintf(gettext("'%s' is not a valid integer value.",
-                                 domain = "R-DataEntry"), s), type = "warning")
-        return(FALSE)
-    }
-    return(TRUE)
-}
-
 AttrDlg <- function(newvar = TRUE)
 {
     if("attrw" %in% ls(DEenv)){
