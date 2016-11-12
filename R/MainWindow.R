@@ -8,17 +8,19 @@ DataEntry <- function()
 
     onDestroy <- function(...)
     {
-        if("varw" %in% ls(DEenv))
+        if(!is.null(DEenv$varw))
             dispose(DEenv$varw)
-        if("dataw" %in% ls(DEenv))
+        if(!is.null(DEenv$dataw))
             dispose(DEenv$dataw)
-        if("optw" %in% ls(DEenv))
+        if(!is.null(DEenv$optw))
             dispose(DEenv$optw)
+        if(!is.null(DEenv$expw))
+            dispose(DEenv$expw)
         rm(list = ls(DEenv), envir = DEenv)
     }
 
-    DEenv$mainw <- gwindow("DataEntry",
-                           handler = onDestroy, visible = FALSE)
+    options("guiToolkit" = "RGtk2")
+    DEenv$mainw <- gwindow("DataEntry", handler = onDestroy, visible = FALSE)
     ggroup(container = DEenv$mainw, expand = TRUE)
     g <- ggroup(horizontal = FALSE, container = DEenv$mainw)
     ggroup(container = DEenv$mainw, expand = TRUE)

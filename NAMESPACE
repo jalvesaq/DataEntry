@@ -1,3 +1,3 @@
 export(DataEntry)
-import(gWidgets)
-importFrom("utils", "capture.output")
+import(gWidgets, RGtk2, gWidgetsRGtk2)
+importFrom("utils", "capture.output", "packageVersion", "write.table")

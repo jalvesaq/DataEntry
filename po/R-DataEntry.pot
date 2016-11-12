@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: DataEntry 0.1\n"
-"POT-Creation-Date: 2016-11-11 11:55\n"
+"Project-Id-Version: DataEntry 0.5\n"
+"POT-Creation-Date: 2016-11-12 16:18\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,13 +85,70 @@ msgstr ""
 msgid "Data exported to \"%s\""
 msgstr ""
 
+msgid "Export data"
+msgstr ""
+
+msgid "How to export?"
+msgstr ""
+
+msgid "Write CSV file"
+msgstr ""
+
+msgid "Write RData file"
+msgstr ""
+
+msgid "Copy to R Workspace"
+msgstr ""
+
+msgid "Include the column \"id\""
+msgstr ""
+
+msgid "File name:"
+msgstr ""
+
+msgid "Object name:"
+msgstr ""
+
+msgid "How to write factor variables?"
+msgstr ""
+
+msgid "As character"
+msgstr ""
+
+msgid "As integer + R script"
+msgstr ""
+
+msgid "As integer + SPSS script"
+msgstr ""
+
+msgid "What field separator should be used?"
+msgstr ""
+
+msgid "Comma"
+msgstr ""
+
+msgid "Semicolon"
+msgstr ""
+
+msgid "Tab"
+msgstr ""
+
+msgid "What to do with variable labels?"
+msgstr ""
+
+msgid "Nothing"
+msgstr ""
+
+msgid "Add a \"variable.labels\" attribute to the data.frame"
+msgstr ""
+
+msgid "Add a \"label\" attribute to each column"
+msgstr ""
+
 msgid "New project"
 msgstr ""
 
 msgid "Open project"
-msgstr ""
-
-msgid "Export data"
 msgstr ""
 
 msgid "Options"

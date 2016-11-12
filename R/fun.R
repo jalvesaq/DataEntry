@@ -30,6 +30,16 @@ SetDefaultAppOpt <- function(clean = TRUE)
         DEenv$AppOpt$bcklast <- FALSE
     if(is.null(DEenv$AppOpt$nbcks))
         DEenv$AppOpt$nbcks <- 3
+    if(is.null(DEenv$AppOpt$exphow))
+        DEenv$AppOpt$exphow <- 1
+    if(is.null(DEenv$AppOpt$expfct))
+        DEenv$AppOpt$expfct <- 1
+    if(is.null(DEenv$AppOpt$expsep))
+        DEenv$AppOpt$expsep <- 1
+    if(is.null(DEenv$AppOpt$explbl))
+        DEenv$AppOpt$explbl <- 1
+    if(is.null(DEenv$AppOpt$expid))
+        DEenv$AppOpt$expid <- FALSE
 }
 
 SetCacheDir <- function()

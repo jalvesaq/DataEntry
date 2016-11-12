@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DataEntry\n"
 "Report-Msgid-Bugs-To: https://github.com/jalvesaq/DataEntry/issues\n"
-"POT-Creation-Date: 2016-11-11 11:55\n"
-"PO-Revision-Date: 2016-11-11 10:25-0300\n"
+"POT-Creation-Date: 2016-11-12 16:18\n"
+"PO-Revision-Date: 2016-11-12 16:23-0300\n"
 "Last-Translator: Jakson Aquino <jalvesaq@gmail.com>\n"
 "Language-Team: pt <pt@li.org>\n"
 "Language: pt_BR\n"
@@ -87,14 +87,71 @@ msgstr "Fechar"
 msgid "Data exported to \"%s\""
 msgstr "Dados exportados para \"%s\""
 
+msgid "Export data"
+msgstr "Exportar dados"
+
+msgid "How to export?"
+msgstr "Como exportar?"
+
+msgid "Write CSV file"
+msgstr "Produzir arquivo CSV"
+
+msgid "Write RData file"
+msgstr "Produzir um arquivo RData"
+
+msgid "Copy to R Workspace"
+msgstr "Copiar para a área de trabalho do R"
+
+msgid "Include the column \"id\""
+msgstr "Incluir a coluna \"id\""
+
+msgid "File name:"
+msgstr "Nome do arquivo:"
+
+msgid "Object name:"
+msgstr "Nome do objeto:"
+
+msgid "How to write factor variables?"
+msgstr "Como salvar variáveis da classe factor?"
+
+msgid "As character"
+msgstr "Como character"
+
+msgid "As integer + R script"
+msgstr "Como inteiro + código R"
+
+msgid "As integer + SPSS script"
+msgstr "Como inteiro + código SPSS"
+
+msgid "What field separator should be used?"
+msgstr "Qual separador de campo deveria ser usado?"
+
+msgid "Comma"
+msgstr "Vírgula"
+
+msgid "Semicolon"
+msgstr "Ponto-e-vírgula"
+
+msgid "Tab"
+msgstr "Tab"
+
+msgid "What to do with variable labels?"
+msgstr "O que fazer com os rótulos das variáveis?"
+
+msgid "Nothing"
+msgstr "Nada"
+
+msgid "Add a \"variable.labels\" attribute to the data.frame"
+msgstr "Adicione um atributo \"variable.labels\" ao data.frame"
+
+msgid "Add a \"label\" attribute to each column"
+msgstr "Adicione um atributo \"label\" a cada coluna"
+
 msgid "New project"
 msgstr "Novo projeto"
 
 msgid "Open project"
 msgstr "Abrir projeto"
-
-msgid "Export data"
-msgstr "Exportar dados"
 
 msgid "Options"
 msgstr "Opções"

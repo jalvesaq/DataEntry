@@ -15,7 +15,7 @@ OptionsDlg <- function(...)
     }
 
 
-    DEenv$optw <- gwindow(gettext("Options"), handler = onDestroy, visible = FALSE)
+    DEenv$optw <- gwindow(gettext("Options", domain = "R-DataEntry"), handler = onDestroy, visible = FALSE)
     g <- ggroup(horizontal = FALSE, container = DEenv$optw)
 
     p <- gframe(gettext("Project options", domain = "R-DataEntry"),
