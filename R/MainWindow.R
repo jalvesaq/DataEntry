@@ -21,16 +21,18 @@ DataEntry <- function()
 
     options("guiToolkit" = "RGtk2")
     DEenv$mainw <- gwindow("DataEntry", handler = onDestroy, visible = FALSE)
-    ggroup(container = DEenv$mainw, expand = TRUE)
-    g <- ggroup(horizontal = FALSE, container = DEenv$mainw)
-    ggroup(container = DEenv$mainw, expand = TRUE)
+    g0 <- ggroup(container = DEenv$mainw, expand = TRUE)
+
+    ggroup(container = g0, expand = TRUE)
+    g <- ggroup(horizontal = FALSE, container = g0)
+    ggroup(container = g0, expand = TRUE)
 
     addSpring(g)
     bt1 <- gbutton(gettext("New project", domain = "R-DataEntry"), container = g)
     bt2 <- gbutton(gettext("Open project", domain = "R-DataEntry"), container = g)
     expBt <- gbutton(gettext("Export data", domain = "R-DataEntry"), container = g)
     addSpring(g)
-    optBt <- gbutton(gettext("Options", domain = "R-DataEntry"), container = g) 
+    optBt <- gbutton(gettext("Options", domain = "R-DataEntry"), container = g)
     clsBt <- gbutton(gettext("Close", domain = "R-DataEntry"), container = g)
 
     onBt1Click <- function(...)
@@ -64,11 +66,11 @@ DataEntry <- function()
         }
     }
 
-    addHandlerChanged(bt1, onBt1Click)
-    addHandlerChanged(bt2, onBt2Click)
-    addHandlerChanged(expBt, ExportDlg)
-    addHandlerChanged(optBt, OptionsDlg)
-    addHandlerChanged(clsBt, function(...) dispose(DEenv$mainw))
+    addHandlerClicked(bt1, onBt1Click)
+    addHandlerClicked(bt2, onBt2Click)
+    addHandlerClicked(expBt, ExportDlg)
+    addHandlerClicked(optBt, OptionsDlg)
+    addHandlerClicked(clsBt, function(...) dispose(DEenv$mainw))
     enabled(expBt) <- FALSE
     visible(DEenv$mainw) <- TRUE
     return(invisible(NULL))

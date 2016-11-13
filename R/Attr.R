@@ -244,8 +244,8 @@ AttrDlg <- function(newvar = TRUE)
 
     addHandlerChanged(aClass, onClassChange)
     addHandlerChanged(intVal, onClassChange)
-    addHandlerChanged(btCancel, onCancel)
-    addHandlerChanged(btOK, onOK)
+    addHandlerClicked(btCancel, onCancel)
+    addHandlerClicked(btOK, onOK)
 
     if(!newvar)
         onClassChange()

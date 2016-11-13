@@ -44,10 +44,10 @@ DataEntryDlg <- function(...)
         SaveProject()
     }
 
-    addHandlerChanged(btEdit,   function(...) RowDlg(FALSE))
-    addHandlerChanged(btDelete, onBtDeleteClick)
-    addHandlerChanged(btAdd,    function(...) RowDlg())
-    addHandlerChanged(btClose,  function(...) dispose(DEenv$dataw))
+    addHandlerClicked(btEdit,   function(...) RowDlg(FALSE))
+    addHandlerClicked(btDelete, onBtDeleteClick)
+    addHandlerClicked(btAdd,    function(...) RowDlg())
+    addHandlerClicked(btClose,  function(...) dispose(DEenv$dataw))
     UpdateDFView()
     visible(DEenv$dataw) <- TRUE
 }

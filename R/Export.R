@@ -1,5 +1,5 @@
 
-ExportCSV <- function(fname, sep, how, keepid, gui)
+ExportCSV <- function(fname, sep, how, keepid)
 {
     d <- DEenv$Data
     if(!keepid)
@@ -10,10 +10,7 @@ ExportCSV <- function(fname, sep, how, keepid, gui)
 
     msg <- sprintf(gettext("Data exported to \"%s\"", domain = "R-DataEntry"),
                    paste0(fname, ".csv"))
-    if(gui)
-        gmessage(msg, type = "info")
-    else
-        cat(mst, "\n")
+    gmessage(msg, type = "info")
 }
 
 ExportDlg <- function(...)
@@ -114,18 +111,18 @@ ExportDlg <- function(...)
         DEenv$AppOpt$expfct <- svalue(expfct, index = TRUE)
         DEenv$AppOpt$expsep <- svalue(expsep, index = TRUE)
         DEenv$AppOpt$explbl <- svalue(explbl, index = TRUE)
-        
+
         SaveAppOpt()
 
         if(DEenv$AppOpt$exphow == 1){
             sep <- c(",", ";", "\\t")[DEenv$AppOpt$expsep]
             how <- c("char", "R", "SPSS")[DEenv$AppOpt$expfct]
             ExportCSV(paste0(dirname(DEenv$fpath), "/", svalue(fnedit)),
-                      sep, how, svalue(expid), TRUE)
+                      sep, how, svalue(expid))
             dispose(DEenv$expw)
             return(invisible(NULL))
         }
-        
+
         d <- DEenv$Data
         if(!svalue(expid))
             d$id <- NULL
@@ -150,8 +147,8 @@ ExportDlg <- function(...)
 
 
     addHandlerChanged(exphow, ShowHide)
-    addHandlerChanged(btCnc, function(...) dispose(DEenv$expw))
-    addHandlerChanged(btOk, onOKclick)
+    addHandlerClicked(btCnc, function(...) dispose(DEenv$expw))
+    addHandlerClicked(btOk, onOKclick)
     ShowHide()
     visible(DEenv$expw) <- TRUE
     focus(btCnc)

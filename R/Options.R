@@ -102,11 +102,11 @@ OptionsDlg <- function(...)
         }
     }
 
-    addHandlerChanged(btDefault, SetDefault)
-    addHandlerChanged(btCancel, function(...) dispose(DEenv$optw))
-    addHandlerChanged(btOK, SetOptions)
-    addHandlerChanged(bckopen, KeepLast)
-    addHandlerChanged(bcklast, KeepLast)
+    addHandlerClicked(btDefault, SetDefault)
+    addHandlerClicked(btCancel, function(...) dispose(DEenv$optw))
+    addHandlerClicked(btOK, SetOptions)
+    addHandlerClicked(bckopen, KeepLast)
+    addHandlerClicked(bcklast, KeepLast)
     KeepLast()
     visible(DEenv$optw) <- TRUE
     focus(btCancel)

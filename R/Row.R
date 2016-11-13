@@ -153,8 +153,8 @@ RowDlg <- function(newrow = TRUE)
         dispose(DEenv$roww)
     }
 
-    addHandlerChanged(btAdd, onBtAddClick)
-    addHandlerChanged(btClose, onBtCloseClick)
+    addHandlerClicked(btAdd, onBtAddClick)
+    addHandlerClicked(btClose, onBtCloseClick)
     if(!is.null(DEenv$ProjOpt$size.roww))
         size(DEenv$roww) <- DEenv$ProjOpt$size.roww
     visible(DEenv$roww) <- TRUE
