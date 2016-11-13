@@ -12,9 +12,16 @@
 
   The package has only one function visible to users: \code{DataEntry()}. The
   function starts a graphical interface and is called when the package is
-  loaded. It might be called later by the user, if needed. If the graphical
-  interface is already running, \code{DataEntry()} just changes the focus to
-  its window.
+  loaded, but if you want to avoid \code{DataEntry()} being called while
+  loading the package, put in your \samp{.Rprofile}:
+
+  \code{
+    options("DataEntry.autostart" = FALSE)
+  }
+
+  If the graphical interface is already running, \code{DataEntry()} just
+  changes the focus to its window.
+
 
   There is no button to save the project because the data is saved whenever a
   new variable is added to the list of variables or a new row is added to the
