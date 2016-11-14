@@ -37,7 +37,7 @@ AttrDlg <- function(newvar = TRUE)
     }
 
     DEenv$attrw <- gwindow(gettext("Attributes", domain = "R-DataEntry"),
-                                  handler = onDestroy, visible = FALSE)
+                           handler = onDestroy, visible = FALSE)
     vbox <- ggroup(horizontal = FALSE, container = DEenv$attrw)
 
     lb1 <- glabel(gettext("Name:", domain = "R-DataEntry"), container = vbox, anchor = c(-1, 1))
@@ -49,13 +49,13 @@ AttrDlg <- function(newvar = TRUE)
     lb3 <- glabel(gettext("Class:", domain = "R-DataEntry"), container = vbox, anchor = c(-1, 1))
     clls <- c("character", "factor", "integer", "numeric")
     rdClass <- gradio(clls, selected = grep(cl, clls), horizontal = TRUE,
-                     container = vbox, anchor = c(-1, 1))
+                      container = vbox, anchor = c(-1, 1))
     gseparator(container = vbox)
 
     lbInt <- glabel(gettext("Set valid:", domain = "R-DataEntry"))
     rdIntVal <- gradio(c(gettext("range", domain = "R-DataEntry"),
-                       gettext("values", domain = "R-DataEntry")),
-                     selected = ifelse(vv == "", 1, 2), horizontal = TRUE)
+                         gettext("values", domain = "R-DataEntry")),
+                       selected = ifelse(vv == "", 1, 2), horizontal = TRUE)
 
     lbRng <- glabel(gettext("Valid range:", domain = "R-DataEntry"))
     hbox1 <- ggroup()
@@ -65,7 +65,7 @@ AttrDlg <- function(newvar = TRUE)
     edMax <- gedit(ma, width = 6, container = hbox1, anchor = c(-1, 1))
 
     lbVV <- glabel(gettext("Valid values (one per line):", domain = "R-DataEntry"),
-                    anchor = c(-1, 1))
+                   anchor = c(-1, 1))
     txVV <- gtext(vv, width = 25, height = 100, anchor = c(-1, 1))
 
     addSpring(vbox)
@@ -219,9 +219,9 @@ AttrDlg <- function(newvar = TRUE)
             oldname <- svalue(DEenv$vlist)
             if(oldname != nm){
                 names(DEenv$Data) <- sub(paste0("^", oldname, "$"), nm,
-                                                  names(DEenv$Data))
+                                         names(DEenv$Data))
                 names(DEenv$VarAttr) <- sub(paste0("^", oldname, "$"), nm,
-                                                   names(DEenv$VarAttr))
+                                            names(DEenv$VarAttr))
             }
         }
 
@@ -231,7 +231,7 @@ AttrDlg <- function(newvar = TRUE)
             DEenv$Data[, nm] <- as.integer(rep(NA, nrow(DEenv$Data)))
         } else if(cl == "factor"){
             DEenv$Data[, nm] <- factor(rep(NA, nrow(DEenv$Data)),
-                                                levels = 1:length(vv), labels = vv)
+                                       levels = 1:length(vv), labels = vv)
         } else {
             DEenv$Data[, nm] <- as.numeric(rep(NA, nrow(DEenv$Data)))
         }

@@ -31,11 +31,11 @@ ExportDlg <- function(...)
 
     glabel(gettext("How to export?", domain = "R-DataEntry"), container = g, anchor = c(-1, 1))
     rdExphow <- gradio(c(gettext("Write CSV file", domain = "R-DataEntry"),
-                       gettext("Write RData file", domain = "R-DataEntry"),
-                       gettext("Copy to R Workspace", domain = "R-DataEntry")),
-                     selected = DEenv$AppOpt$exphow, horizontal = FALSE, container = g)
+                         gettext("Write RData file", domain = "R-DataEntry"),
+                         gettext("Copy to R Workspace", domain = "R-DataEntry")),
+                       selected = DEenv$AppOpt$exphow, horizontal = FALSE, container = g)
     cbExpid <- gcheckbox(gettext("Include the column \"id\"",
-                       domain = "R-DataEntry"), checked = DEenv$AppOpt$expid, container = g)
+                                 domain = "R-DataEntry"), checked = DEenv$AppOpt$expid, container = g)
     gn <- ggroup(horizontal = FALSE, container = g)
 
     gfn <- ggroup()
@@ -51,26 +51,26 @@ ExportDlg <- function(...)
 
     gcsv <- ggroup(horizontal = FALSE, container = g)
     lbFac <- glabel(gettext("How to write factor variables?",
-                             domain = "R-DataEntry"), anchor = c(-1, 1))
+                            domain = "R-DataEntry"), anchor = c(-1, 1))
     rdExpfct <- gradio(c(gettext("As character", domain = "R-DataEntry"),
-                       gettext("As integer + R script", domain = "R-DataEntry"),
-                       gettext("As integer + SPSS script", domain = "R-DataEntry")),
-                     selected = DEenv$AppOpt$expfct, horizontal = FALSE)
+                         gettext("As integer + R script", domain = "R-DataEntry"),
+                         gettext("As integer + SPSS script", domain = "R-DataEntry")),
+                       selected = DEenv$AppOpt$expfct, horizontal = FALSE)
 
     lbSep <- glabel(gettext("What field separator should be used?",
-                             domain = "R-DataEntry"), anchor = c(-1, 1))
+                            domain = "R-DataEntry"), anchor = c(-1, 1))
     rdExpsep <- gradio(c(gettext("Comma", domain = "R-DataEntry"),
-                       gettext("Semicolon", domain = "R-DataEntry"),
-                       gettext("Tab", domain = "R-DataEntry")),
-                     selected = DEenv$AppOpt$expsep, horizontal = FALSE)
+                         gettext("Semicolon", domain = "R-DataEntry"),
+                         gettext("Tab", domain = "R-DataEntry")),
+                       selected = DEenv$AppOpt$expsep, horizontal = FALSE)
 
     grda <- ggroup(horizontal = FALSE, container = g)
     lbLbl <- glabel(gettext("What to do with variable labels?",
-                             domain = "R-DataEntry"))
+                            domain = "R-DataEntry"))
     rdExplbl <- gradio(c(gettext("Nothing", domain = "R-DataEntry"),
-                       gettext("Add a \"variable.labels\" attribute to the data.frame", domain = "R-DataEntry"),
-                       gettext("Add a \"label\" attribute to each column", domain = "R-DataEntry")),
-                     selected = DEenv$AppOpt$explbl, horizontal = FALSE)
+                         gettext("Add a \"variable.labels\" attribute to the data.frame", domain = "R-DataEntry"),
+                         gettext("Add a \"label\" attribute to each column", domain = "R-DataEntry")),
+                       selected = DEenv$AppOpt$explbl, horizontal = FALSE)
 
     addSpring(g)
     gbt <- ggroup(container = g)

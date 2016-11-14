@@ -138,11 +138,8 @@ NewProject <- function()
     DEenv$id <- 0
     DEenv$Data <- data.frame(id = integer(0))
     DEenv$VarAttr <- list()
-    DEenv$VarAttr[["id"]] <- list("label" = gettext("Internal variable (created automatically)",
-                                                    domain = "R-DataEntry"),
-                                  "class" = "integer",
-                                  "valid.values" = NA,
-                                  "min" = NA, "max" = NA)
+    DEenv$VarAttr[["id"]] <- list("label" = gettext("Internal variable (created automatically)", domain = "R-DataEntry"),
+                                  "class" = "integer", "valid.values" = NA, "min" = NA, "max" = NA)
 
     SetDefaultProjOpt()
     SaveProject()

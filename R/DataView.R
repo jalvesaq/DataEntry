@@ -25,7 +25,7 @@ DataEntryDlg <- function(...)
     }
 
     DEenv$dataw <- gwindow(gettext("View and edit data", domain = "R-DataEntry"),
-                                  handler = onDestroy, visible = FALSE)
+                           handler = onDestroy, visible = FALSE)
     g <- ggroup(horizontal = FALSE, container = DEenv$dataw)
     DEenv$dfview <- gtable(DEenv$Data, container = g, expand = TRUE)
     g1 <- ggroup(container = g)

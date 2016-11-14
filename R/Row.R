@@ -13,7 +13,7 @@ RowDlg <- function(newrow = TRUE)
     DEenv$roww <- gwindow(ifelse(newrow,
                                  gettext("Add row", domain = "R-DataEntry"),
                                  gettext("Replace row", domain = "R-DataEntry")),
-                                 handler = onDestroy, visible = FALSE)
+                          handler = onDestroy, visible = FALSE)
     g <- ggroup(horizontal = FALSE, container = DEenv$roww, use.scrollwindow = TRUE)
     l <- glayout(container = g, expand = TRUE)
     if(!newrow){

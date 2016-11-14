@@ -22,9 +22,9 @@ OptionsDlg <- function(...)
                 horizontal = FALSE)
 
     cbDrop <- gcheckbox(gettext("Put valid values in dropdown list", domain = "R-DataEntry"),
-                       checked = DEenv$ProjOpt$droplist, container = p)
+                        checked = DEenv$ProjOpt$droplist, container = p)
     cbEmpty <- gcheckbox(gettext("Allow blank cells", domain = "R-DataEntry"),
-                       checked = DEenv$ProjOpt$emptycell, container = p)
+                         checked = DEenv$ProjOpt$emptycell, container = p)
     gm <- ggroup(container = p)
     glabel(gettext("Text representing missing values: ", domain = "R-DataEntry"),
            container = gm, anchor = c(-1, 1))
@@ -46,14 +46,14 @@ OptionsDlg <- function(...)
     add(gf, btFont)
 
     cbBckOpen <- gcheckbox(gettext("Backup when opening project",
-                               domain = "R-DataEntry"),
-                         checked = DEenv$AppOpt$bckopen, container = a)
+                                   domain = "R-DataEntry"),
+                           checked = DEenv$AppOpt$bckopen, container = a)
     cbBckLast <- gcheckbox(gettext("Keep only the last backups",
-                                 domain = "R-DataEntry"),
-                         checked = DEenv$AppOpt$bcklast)
+                                   domain = "R-DataEntry"),
+                           checked = DEenv$AppOpt$bcklast)
     g1 <- ggroup()
     lbNBck <- glabel(gettext("Number of backups to keep: ", domain = "R-DataEntry"),
-                      container = g1, anchor = c(-1, 1))
+                     container = g1, anchor = c(-1, 1))
     edNBcks <- gedit(as.character(DEenv$AppOpt$nbcks), width = 3, container = g1)
 
     addSpring(g)
