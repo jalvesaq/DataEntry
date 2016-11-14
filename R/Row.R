@@ -24,22 +24,38 @@ RowDlg <- function(newrow = TRUE)
             return(invisible(NULL))
         }
         srow <- DEenv$Data[DEenv$Data$id == sid, ]
+        if(DEenv$ProjOpt$emptycell)
+            srow <- sapply(srow, function(x) ifelse(is.na(x), "", as.character(x)))
+        else
+            srow <- sapply(srow, function(x) ifelse(is.na(x), DEenv$ProjOpt$missv, as.character(x)))
     }
     for(i in 2:ncol(DEenv$Data)){
         icol <- names(DEenv$Data)[i]
         l[i-1, 1] <- paste0(icol, ":")
         if(newrow){
-            if(DEenv$ProjOpt$droplist && !is.na(DEenv$VarAttr[[i]]$valid.values[1]))
-                l[i-1, 2] <- gdroplist(c("", DEenv$VarAttr[[i]]$valid.values))
-            else
+            if(DEenv$ProjOpt$droplist && !is.na(DEenv$VarAttr[[i]]$valid.values[1])){
+                if(DEenv$ProjOpt$emptycell)
+                    l[i-1, 2] <- gdroplist(c("", DEenv$VarAttr[[i]]$valid.values))
+                else
+                    l[i-1, 2] <- gdroplist(c("", DEenv$VarAttr[[i]]$valid.values, DEenv$ProjOpt$missv))
+            } else {
                 l[i-1, 2] <- gedit(width = 10)
+            }
         } else {
-            if(DEenv$ProjOpt$droplist && !is.na(DEenv$VarAttr[[i]]$valid.values[1]))
-                l[i-1, 2] <- gdroplist(c("", DEenv$VarAttr[[i]]$valid.values),
-                                       selected = grep(paste0("^", as.character(srow[1, icol]), "$"),
-                                                       DEenv$VarAttr[[i]]$valid.values) + 1)
-            else
-                l[i-1, 2] <- gedit(as.character(srow[1, icol]), width = 10)
+            if(DEenv$ProjOpt$droplist && !is.na(DEenv$VarAttr[[i]]$valid.values[1])){
+                items <- c("", as.character(DEenv$VarAttr[[i]]$valid.values))
+                if(!DEenv$ProjOpt$emptycell)
+                    items <- c(items, DEenv$ProjOpt$missv)
+                idx <- grep(paste0("^", srow[icol], "$"), items)
+                if(idx < 1){
+                    idx <- 1
+                    warning(sprintf(gettext("Error trying to find \"%s\" as valid value of \"%s\".",
+                                            domain = "R-DataEntry"), srow[icol], icol))
+                }
+                l[i-1, 2] <- gdroplist(items, selected = idx)
+            } else {
+                l[i-1, 2] <- gedit(srow[icol], width = 10)
+            }
         }
         l[i-1, 3] <- DEenv$VarAttr[[icol]]$label
     }

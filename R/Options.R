@@ -81,6 +81,12 @@ OptionsDlg <- function(...)
             focus(edNBcks)
             return(invisible(NULL))
         }
+        if(!svalue(cbEmpty) && svalue(edMissV) == ""){
+            gmessage(gettext("You must define the string representing missing values.",
+                             domain = "R-DataEntry"), type = "warning")
+            focus(edMissV)
+            return(invisible(NULL))
+        }
 
         if(oldfont != btFont$GetFontName()){
             DEenv$AppOpt$font <- btFont$GetFontName()
@@ -105,6 +111,9 @@ OptionsDlg <- function(...)
     {
         delete(a, cbBckLast)
         delete(a, g1)
+        delete(p, gm)
+        if(!svalue(cbEmpty))
+            add(p, gm)
         if(svalue(cbBckOpen)){
             add(a, cbBckLast)
             if(svalue(cbBckLast))
@@ -117,11 +126,12 @@ OptionsDlg <- function(...)
         }
     }
 
+    addHandlerClicked(cbEmpty, ShowHide)
+    addHandlerClicked(cbBckOpen, ShowHide)
+    addHandlerClicked(cbBckLast, ShowHide)
     addHandlerClicked(btDefault, SetDefault)
     addHandlerClicked(btCancel, function(...) dispose(DEenv$optw))
     addHandlerClicked(btOK, SetOptions)
-    addHandlerClicked(cbBckOpen, ShowHide)
-    addHandlerClicked(cbBckLast, ShowHide)
     ShowHide()
     visible(DEenv$optw) <- TRUE
     focus(btCancel)
