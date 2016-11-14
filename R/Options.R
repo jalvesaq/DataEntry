@@ -42,7 +42,7 @@ OptionsDlg <- function(...)
     if(!is.null(DEenv$AppOpt$font)){
         gtkFontButtonSetFontName(btFont, DEenv$AppOpt$font)
     }
-    oldfont <- DEenv$AppOpt$font
+    oldfont <- btFont$GetFontName()
     add(gf, btFont)
 
     cbBckOpen <- gcheckbox(gettext("Backup when opening project",
