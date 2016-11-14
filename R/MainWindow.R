@@ -31,10 +31,10 @@ DataEntry <- function()
     addSpring(g)
     bt1 <- gbutton(gettext("New project", domain = "R-DataEntry"), container = g)
     bt2 <- gbutton(gettext("Open project", domain = "R-DataEntry"), container = g)
-    expBt <- gbutton(gettext("Export data", domain = "R-DataEntry"), container = g)
+    btExp <- gbutton(gettext("Export data", domain = "R-DataEntry"), container = g)
     addSpring(g)
-    optBt <- gbutton(gettext("Options", domain = "R-DataEntry"), container = g)
-    clsBt <- gbutton(gettext("Close", domain = "R-DataEntry"), container = g)
+    btOpt <- gbutton(gettext("Options", domain = "R-DataEntry"), container = g)
+    btClose <- gbutton(gettext("Close", domain = "R-DataEntry"), container = g)
 
     onBt1Click <- function(...)
     {
@@ -42,7 +42,7 @@ DataEntry <- function()
             if(NewProject()){
                 svalue(bt1) <- gettext("Set variables", domain = "R-DataEntry")
                 svalue(bt2) <- gettext("Edit data", domain = "R-DataEntry")
-                enabled(expBt) <- TRUE
+                enabled(btExp) <- TRUE
                 focus(bt1)
             }
         } else {
@@ -57,7 +57,7 @@ DataEntry <- function()
             if(OpenProject()){
                 svalue(bt1) <- gettext("Set variables", domain = "R-DataEntry")
                 svalue(bt2) <- gettext("Edit data", domain = "R-DataEntry")
-                enabled(expBt) <- TRUE
+                enabled(btExp) <- TRUE
                 if(length(names(DEenv$Data)) < 2)
                     focus(bt1)
             }
@@ -69,10 +69,10 @@ DataEntry <- function()
 
     addHandlerClicked(bt1, onBt1Click)
     addHandlerClicked(bt2, onBt2Click)
-    addHandlerClicked(expBt, ExportDlg)
-    addHandlerClicked(optBt, OptionsDlg)
-    addHandlerClicked(clsBt, function(...) dispose(DEenv$mainw))
-    enabled(expBt) <- FALSE
+    addHandlerClicked(btExp, ExportDlg)
+    addHandlerClicked(btOpt, OptionsDlg)
+    addHandlerClicked(btClose, function(...) dispose(DEenv$mainw))
+    enabled(btExp) <- FALSE
     visible(DEenv$mainw) <- TRUE
     return(invisible(NULL))
 }

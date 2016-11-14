@@ -21,14 +21,14 @@ OptionsDlg <- function(...)
     p <- gframe(gettext("Project options", domain = "R-DataEntry"),
                 horizontal = FALSE)
 
-    droplist <- gcheckbox(gettext("Put valid values in dropdown list", domain = "R-DataEntry"),
+    cbDrop <- gcheckbox(gettext("Put valid values in dropdown list", domain = "R-DataEntry"),
                        checked = DEenv$ProjOpt$droplist, container = p)
-    emptycell <- gcheckbox(gettext("Allow blank cells", domain = "R-DataEntry"),
+    cbEmpty <- gcheckbox(gettext("Allow blank cells", domain = "R-DataEntry"),
                        checked = DEenv$ProjOpt$emptycell, container = p)
     gm <- ggroup(container = p)
     glabel(gettext("Text representing missing values: ", domain = "R-DataEntry"),
            container = gm, anchor = c(-1, 1))
-    missv <- gedit(DEenv$ProjOpt$missv, width = 4, container = gm)
+    edMissV <- gedit(DEenv$ProjOpt$missv, width = 4, container = gm)
 
     if(!is.null(DEenv$VarAttr))
         add(g, p)
@@ -36,25 +36,25 @@ OptionsDlg <- function(...)
     a <- gframe(gettext("Application options", domain = "R-DataEntry"),
                 horizontal = FALSE, container = g)
 
-    fbox <- ggroup(container = a)
-    glabel(gettext("Set font for entering data:", domain = "R-DataEntry"), container = fbox)
+    gf <- ggroup(container = a)
+    glabel(gettext("Set font for entering data:", domain = "R-DataEntry"), container = gf)
     btFont <- gtkFontButtonNew()
     if(!is.null(DEenv$AppOpt$font)){
         gtkFontButtonSetFontName(btFont, DEenv$AppOpt$font)
     }
     oldfont <- DEenv$AppOpt$font
-    add(fbox, btFont)
+    add(gf, btFont)
 
-    bckopen <- gcheckbox(gettext("Backup when opening project",
+    cbBckOpen <- gcheckbox(gettext("Backup when opening project",
                                domain = "R-DataEntry"),
                          checked = DEenv$AppOpt$bckopen, container = a)
-    bcklast <- gcheckbox(gettext("Keep only the last backups",
+    cbBckLast <- gcheckbox(gettext("Keep only the last backups",
                                  domain = "R-DataEntry"),
                          checked = DEenv$AppOpt$bcklast)
     g1 <- ggroup()
-    nbckLbl <- glabel(gettext("Number of backups to keep: ", domain = "R-DataEntry"),
+    lbNBck <- glabel(gettext("Number of backups to keep: ", domain = "R-DataEntry"),
                       container = g1, anchor = c(-1, 1))
-    nbcks <- gedit(as.character(DEenv$AppOpt$nbcks), width = 3, container = g1)
+    edNBcks <- gedit(as.character(DEenv$AppOpt$nbcks), width = 3, container = g1)
 
     addSpring(g)
     g2 <- ggroup(container = g)
@@ -71,14 +71,14 @@ OptionsDlg <- function(...)
 
     SetOptions <- function(...)
     {
-        if(!IsNumericInt(svalue(nbcks), "integer")){
-            focus(nbcks)
+        if(!IsNumericInt(svalue(edNBcks), "integer")){
+            focus(edNBcks)
             return(invisible(NULL))
         }
-        if(as.integer(svalue(nbcks)) < 1){
+        if(as.integer(svalue(edNBcks)) < 1){
             gmessage(gettext("Please, enter a positive integer number.",
                              domain = "R-DataEntry"), type = "warning")
-            focus(nbcks)
+            focus(edNBcks)
             return(invisible(NULL))
         }
 
@@ -89,30 +89,30 @@ OptionsDlg <- function(...)
         }
 
         if(!is.null(DEenv$VarAttr)){
-            DEenv$ProjOpt$droplist  <- svalue(droplist)
-            DEenv$ProjOpt$emptycell <- svalue(emptycell)
-            DEenv$ProjOpt$missv     <- svalue(missv)
+            DEenv$ProjOpt$droplist  <- svalue(cbDrop)
+            DEenv$ProjOpt$emptycell <- svalue(cbEmpty)
+            DEenv$ProjOpt$missv     <- svalue(edMissV)
             SaveProject()
         }
-        DEenv$AppOpt$bckopen    <- svalue(bckopen)
-        DEenv$AppOpt$bcklast    <- svalue(bcklast)
-        DEenv$AppOpt$nbcks      <- as.integer(svalue(nbcks))
+        DEenv$AppOpt$bckopen    <- svalue(cbBckOpen)
+        DEenv$AppOpt$bcklast    <- svalue(cbBckLast)
+        DEenv$AppOpt$nbcks      <- as.integer(svalue(edNBcks))
         SaveAppOpt()
         dispose(DEenv$optw)
     }
 
-    KeepLast <- function(...)
+    ShowHide <- function(...)
     {
-        delete(a, bcklast)
+        delete(a, cbBckLast)
         delete(a, g1)
-        if(svalue(bckopen)){
-            add(a, bcklast)
-            if(svalue(bcklast))
+        if(svalue(cbBckOpen)){
+            add(a, cbBckLast)
+            if(svalue(cbBckLast))
                 add(a, g1)
             else
                 delete(a, g1)
         } else {
-            delete(a, bcklast)
+            delete(a, cbBckLast)
             delete(a, g1)
         }
     }
@@ -120,9 +120,9 @@ OptionsDlg <- function(...)
     addHandlerClicked(btDefault, SetDefault)
     addHandlerClicked(btCancel, function(...) dispose(DEenv$optw))
     addHandlerClicked(btOK, SetOptions)
-    addHandlerClicked(bckopen, KeepLast)
-    addHandlerClicked(bcklast, KeepLast)
-    KeepLast()
+    addHandlerClicked(cbBckOpen, ShowHide)
+    addHandlerClicked(cbBckLast, ShowHide)
+    ShowHide()
     visible(DEenv$optw) <- TRUE
     focus(btCancel)
 }

@@ -45,7 +45,7 @@ RowDlg <- function(newrow = TRUE)
     }
     g1 <- ggroup(container = g)
     addSpring(g1)
-    btClose <- gbutton(gettext("Cancel", domain = "R-DataEntry"), container = g1)
+    btCancel <- gbutton(gettext("Cancel", domain = "R-DataEntry"), container = g1)
     if(newrow)
         btAdd <- gbutton(gettext("Add", domain = "R-DataEntry"), container = g1)
     else
@@ -154,7 +154,7 @@ RowDlg <- function(newrow = TRUE)
     }
 
     addHandlerClicked(btAdd, onBtAddClick)
-    addHandlerClicked(btClose, onBtCloseClick)
+    addHandlerClicked(btCancel, onBtCloseClick)
     if(!is.null(DEenv$ProjOpt$size.roww))
         size(DEenv$roww) <- DEenv$ProjOpt$size.roww
 
@@ -165,7 +165,7 @@ RowDlg <- function(newrow = TRUE)
             gtkWidgetModifyFont(l[i-1, 2]@widget@widget, fnt)
             gtkWidgetModifyFont(l[i-1, 3]@widget@widget, fnt)
         }
-        gtkWidgetModifyFont(btClose@widget@widget$getChildren()[[1]], fnt)
+        gtkWidgetModifyFont(btCancel@widget@widget$getChildren()[[1]], fnt)
         gtkWidgetModifyFont(btAdd@widget@widget$getChildren()[[1]], fnt)
     }
 
