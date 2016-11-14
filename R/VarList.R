@@ -3,7 +3,7 @@ UpdateVarList <- function()
 {
     DEenv$vlist[,] <- data.frame(Var = names(DEenv$Data),
                                  stringsAsFactors = FALSE)
-    if("dfview" %in% ls(DEenv))
+    if(!is.null(DEenv$dfview))
         UpdateDFView()
 }
 
@@ -92,13 +92,13 @@ MoveUpDown <- function(up)
 
 VarListDlg <- function(...)
 {
-    if("varw" %in% ls(DEenv)){
+    if(!is.null(DEenv$varw)){
         focus(DEenv$varw)
         return(invisible(NULL))
     }
     onDestroy <- function(...)
     {
-        if("attrw" %in% ls(DEenv))
+        if(!is.null(DEenv$attrw))
             dispose(DEenv$attrw)
         rm(list = c("varw", "vlist", "aNm", "aLb", "aCl", "aMi", "aMa", "aVv"),
            envir = DEenv)

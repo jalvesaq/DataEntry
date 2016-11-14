@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DataEntry 0.5\n"
-"POT-Creation-Date: 2016-11-12 16:18\n"
+"POT-Creation-Date: 2016-11-13 18:42\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -173,6 +173,9 @@ msgid "Text representing missing values:"
 msgstr ""
 
 msgid "Application options"
+msgstr ""
+
+msgid "Set font for entering data:"
 msgstr ""
 
 msgid "Backup when opening project"

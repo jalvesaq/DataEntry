@@ -1,7 +1,7 @@
 
 OptionsDlg <- function(...)
 {
-    if("optw" %in% ls(DEenv)){
+    if(!is.null(DEenv$optw)){
         focus(DEenv$optw)
         return(invisible(NULL))
     }
@@ -30,11 +30,20 @@ OptionsDlg <- function(...)
            container = gm, anchor = c(-1, 1))
     missv <- gedit(DEenv$ProjOpt$missv, width = 4, container = gm)
 
-    if("VarAttr" %in% ls(DEenv))
+    if(!is.null(DEenv$VarAttr))
         add(g, p)
 
     a <- gframe(gettext("Application options", domain = "R-DataEntry"),
                 horizontal = FALSE, container = g)
+
+    fbox <- ggroup(container = a)
+    glabel(gettext("Set font for entering data:", domain = "R-DataEntry"), container = fbox)
+    btFont <- gtkFontButtonNew()
+    if(!is.null(DEenv$AppOpt$font)){
+        gtkFontButtonSetFontName(btFont, DEenv$AppOpt$font)
+    }
+    oldfont <- DEenv$AppOpt$font
+    add(fbox, btFont)
 
     bckopen <- gcheckbox(gettext("Backup when opening project",
                                domain = "R-DataEntry"),
@@ -73,7 +82,13 @@ OptionsDlg <- function(...)
             return(invisible(NULL))
         }
 
-        if("VarAttr" %in% ls(DEenv)){
+        if(oldfont != btFont$GetFontName()){
+            DEenv$AppOpt$font <- btFont$GetFontName()
+            font <- pangoFontDescriptionFromString(DEenv$AppOpt$font)
+            gtkWidgetModifyFont(DEenv$mainw@widget@widget, font)
+        }
+
+        if(!is.null(DEenv$VarAttr)){
             DEenv$ProjOpt$droplist  <- svalue(droplist)
             DEenv$ProjOpt$emptycell <- svalue(emptycell)
             DEenv$ProjOpt$missv     <- svalue(missv)

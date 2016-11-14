@@ -1,7 +1,7 @@
 
 AttrDlg <- function(newvar = TRUE)
 {
-    if("attrw" %in% ls(DEenv)){
+    if(!is.null(DEenv$attrw)){
         focus(DEenv$attrw)
         return(invisible(NULL))
     }
@@ -40,13 +40,13 @@ AttrDlg <- function(newvar = TRUE)
                                   handler = onDestroy, visible = FALSE)
     vbox <- ggroup(horizontal = FALSE, container = DEenv$attrw)
 
-    glabel(gettext("Name:", domain = "R-DataEntry"), container = vbox, anchor = c(-1, 1))
+    lb1 <- glabel(gettext("Name:", domain = "R-DataEntry"), container = vbox, anchor = c(-1, 1))
     aName <- gedit(nm, width = 25, container = vbox, anchor = c(-1, 1))
 
-    glabel(gettext("Label:", domain = "R-DataEntry"), container = vbox, anchor = c(-1, 1))
+    lb2 <- glabel(gettext("Label:", domain = "R-DataEntry"), container = vbox, anchor = c(-1, 1))
     aLbl <- gedit(lb, width = 25, container = vbox, anchor = c(-1, 1))
 
-    glabel(gettext("Class:", domain = "R-DataEntry"), container = vbox, anchor = c(-1, 1))
+    lb3 <- glabel(gettext("Class:", domain = "R-DataEntry"), container = vbox, anchor = c(-1, 1))
     clls <- c("character", "factor", "integer", "numeric")
     aClass <- gradio(clls, selected = grep(cl, clls), horizontal = TRUE,
                      container = vbox, anchor = c(-1, 1))
@@ -250,6 +250,26 @@ AttrDlg <- function(newvar = TRUE)
     if(!newvar)
         onClassChange()
 
+    if(!is.null(DEenv$AppOpt$font)){
+        fnt <- pangoFontDescriptionFromString(DEenv$AppOpt$font)
+        gtkWidgetModifyFont(lb1@widget@widget, fnt)
+        gtkWidgetModifyFont(aName@widget@widget, fnt)
+        gtkWidgetModifyFont(lb2@widget@widget, fnt)
+        gtkWidgetModifyFont(aLbl@widget@widget, fnt)
+        gtkWidgetModifyFont(lb3@widget@widget, fnt)
+        gtkWidgetModifyFont(aClass@widget@widget$getChildren()[[1]], fnt) # FIXME: does not work for radio buttons
+        gtkWidgetModifyFont(intLbl@widget@widget, fnt)
+        gtkWidgetModifyFont(intVal@widget@widget$getChildren()[[1]], fnt) # FIXME: does not work for radio buttons
+        gtkWidgetModifyFont(rLbl@widget@widget, fnt)
+        gtkWidgetModifyFont(lMin@widget@widget, fnt)
+        gtkWidgetModifyFont(aMin@widget@widget, fnt)
+        gtkWidgetModifyFont(lMax@widget@widget, fnt)
+        gtkWidgetModifyFont(aMax@widget@widget, fnt)
+        gtkWidgetModifyFont(vvLbl@widget@widget, fnt)
+        gtkWidgetModifyFont(aVV@widget@widget, fnt)
+        gtkWidgetModifyFont(btCancel@widget@widget$getChildren()[[1]], fnt)
+        gtkWidgetModifyFont(btOK@widget@widget$getChildren()[[1]], fnt)
+    }
     visible(DEenv$attrw) <- TRUE
     focus(aName)
 }

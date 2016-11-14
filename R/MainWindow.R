@@ -1,7 +1,7 @@
 
 DataEntry <- function()
 {
-    if("mainw" %in% ls(DEenv)){
+    if(!is.null(DEenv$mainw)){
         focus(DEenv$mainw)
         return(invisible(NULL))
     }
@@ -21,6 +21,7 @@ DataEntry <- function()
 
     options("guiToolkit" = "RGtk2")
     DEenv$mainw <- gwindow("DataEntry", handler = onDestroy, visible = FALSE)
+
     g0 <- ggroup(container = DEenv$mainw, expand = TRUE)
 
     ggroup(container = g0, expand = TRUE)

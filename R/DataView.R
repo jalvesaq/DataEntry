@@ -12,14 +12,14 @@ DataEntryDlg <- function(...)
         return(invisible(NULL))
     }
 
-    if("dataw" %in% ls(DEenv)){
+    if(!is.null(DEenv$dataw)){
         focus(DEenv$dataw)
         return(invisible(NULL))
     }
 
     onDestroy <- function(...)
     {
-        if("roww" %in% ls(DEenv))
+        if(!is.null(DEenv$roww))
             dispose(DEenv$roww)
         rm(list = "dataw", envir = DEenv)
     }

@@ -1,7 +1,7 @@
 
 RowDlg <- function(newrow = TRUE)
 {
-    if("roww" %in% ls(DEenv)){
+    if(!is.null(DEenv$roww)){
         focus(DEenv$roww)
         return(invisible(NULL))
     }
@@ -157,6 +157,19 @@ RowDlg <- function(newrow = TRUE)
     addHandlerClicked(btClose, onBtCloseClick)
     if(!is.null(DEenv$ProjOpt$size.roww))
         size(DEenv$roww) <- DEenv$ProjOpt$size.roww
+
+    if(!is.null(DEenv$AppOpt$font)){
+        fnt <- pangoFontDescriptionFromString(DEenv$AppOpt$font)
+        for(i in 2:ncol(DEenv$Data)){
+            gtkWidgetModifyFont(l[i-1, 1]@widget@widget, fnt)
+            gtkWidgetModifyFont(l[i-1, 2]@widget@widget, fnt)
+            gtkWidgetModifyFont(l[i-1, 3]@widget@widget, fnt)
+        }
+        gtkWidgetModifyFont(btClose@widget@widget$getChildren()[[1]], fnt)
+        gtkWidgetModifyFont(btAdd@widget@widget$getChildren()[[1]], fnt)
+    }
+
+
     visible(DEenv$roww) <- TRUE
     focus(l[1, 2])
 }

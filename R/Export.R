@@ -15,7 +15,7 @@ ExportCSV <- function(fname, sep, how, keepid)
 
 ExportDlg <- function(...)
 {
-    if("expw" %in% ls(DEenv)){
+    if(!is.null(DEenv$expw)){
         focus(DEenv$expw)
         return(invisible(NULL))
     }
