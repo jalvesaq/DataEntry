@@ -19,6 +19,11 @@ AttrDlg <- function(newvar = TRUE)
         ma <- ""
     } else {
         nm <- svalue(DEenv$vlist)
+        if(nm == "id"){
+            gmessage(gettext("Cannot edit 'id'.", domain = "R-DataEntry"),
+                     type = "warning")
+            return(invisible(NULL))
+        }
         lb <- DEenv$VarAttr[[nm]]$label
         cl <- DEenv$VarAttr[[nm]]$class
         if(is.na(DEenv$VarAttr[[nm]]$valid.values[1]))

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: DataEntry 0.5\n"
-"POT-Creation-Date: 2016-11-13 18:42\n"
+"Project-Id-Version: DataEntry 0.9\n"
+"POT-Creation-Date: 2016-12-09 14:29\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9,6 +9,9 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+
+msgid "Cannot edit 'id'."
+msgstr ""
 
 msgid "Attributes"
 msgstr ""
@@ -193,10 +196,16 @@ msgstr ""
 msgid "Please, enter a positive integer number."
 msgstr ""
 
+msgid "You must define the string representing missing values."
+msgstr ""
+
 msgid "Replace row"
 msgstr ""
 
 msgid "No row is selected."
+msgstr ""
+
+msgid "Error trying to find \"%s\" as valid value of \"%s\"."
 msgstr ""
 
 msgid "Add"

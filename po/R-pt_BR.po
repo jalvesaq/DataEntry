@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DataEntry\n"
 "Report-Msgid-Bugs-To: https://github.com/jalvesaq/DataEntry/issues\n"
-"POT-Creation-Date: 2016-11-13 18:42\n"
-"PO-Revision-Date: 2016-11-13 18:43-0300\n"
+"POT-Creation-Date: 2016-12-09 14:29\n"
+"PO-Revision-Date: 2016-12-09 14:31-0300\n"
 "Last-Translator: Jakson Aquino <jalvesaq@gmail.com>\n"
 "Language-Team: pt <pt@li.org>\n"
 "Language: pt_BR\n"
@@ -11,6 +11,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Cannot edit 'id'."
+msgstr "Não é possível editar a variável 'id'."
 
 msgid "Attributes"
 msgstr "Atributos"
@@ -195,11 +198,17 @@ msgstr "Padrão"
 msgid "Please, enter a positive integer number."
 msgstr "Por favor, digite um número inteiro positivo."
 
+msgid "You must define the string representing missing values."
+msgstr "Você tem que definir o texto indicador de valores omissos."
+
 msgid "Replace row"
 msgstr "Substituir linha"
 
 msgid "No row is selected."
 msgstr "Nenhuma linha está selecionada."
+
+msgid "Error trying to find \"%s\" as valid value of \"%s\"."
+msgstr "Erro tentando encontrar \"%s\" como valor válido de \"%s\"."
 
 msgid "Add"
 msgstr "Adicionar"
@@ -224,7 +233,7 @@ msgstr ""
 "%s"
 
 msgid "Cannot delete 'id'."
-msgstr "Não é possível deletar o 'id'."
+msgstr "Não é possível deletar 'id'."
 
 msgid "No variable is selected."
 msgstr "Nenhuma variável está selecionada."
