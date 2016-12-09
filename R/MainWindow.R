@@ -46,7 +46,7 @@ DataEntry <- function()
                 focus(bt1)
             }
         } else {
-            if(svalue(bt1) == gettext("Set variables", domain = "R-DataEntry"))
+            if(!is.null(DEenv$Data))
                 VarListDlg()
         }
     }
@@ -62,7 +62,7 @@ DataEntry <- function()
                     focus(bt1)
             }
         } else {
-            if(svalue(bt2) == gettext("Edit data", domain = "R-DataEntry"))
+            if(!is.null(DEenv$Data))
                 DataEntryDlg()
         }
     }
