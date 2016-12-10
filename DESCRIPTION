@@ -1,7 +1,7 @@
 Package: DataEntry
 Type: Package
-Title: Make it easier to enter questionnaire data
-Version: 0.5
+Title: Make it Easier to Enter Questionnaire Data
+Version: 0.9
 Date: 2016-11-05
 Author: Jakson Aquino
 Maintainer: Jakson Aquino <jalvesaq@gmail.com>
