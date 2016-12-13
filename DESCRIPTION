@@ -5,7 +5,7 @@ Version: 0.9
 Date: 2016-11-05
 Author: Jakson Aquino
 Maintainer: Jakson Aquino <jalvesaq@gmail.com>
-Depends: gWidgets, RGtk2, gWidgetsRGtk2
+Depends: gWidgets, RGtk2, gWidgetsRGtk2, digest
 Description: This is a GUI application for defining
   attributes and setting valid values of variables, and then,
   entering questionnaire data in a data.frame.

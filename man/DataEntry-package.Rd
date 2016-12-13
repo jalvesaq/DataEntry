@@ -62,6 +62,11 @@
 
   The Export data button allows users to export the \code{data.frame} as a
   \samp{csv} file, save it in a \samp{RData} file or copy it to R Workspace.
+
+  The list of variables can be locked with a password. This might be useful if
+  you are setting a project that will later be used by other people to enter
+  data and you want to prevent that the attributes of the variables are
+  accidentally changed.
 }
 \author{
 \packageAuthor{DataEntry}

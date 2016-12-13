@@ -1,4 +1,42 @@
 
+LockIt <- function(h, ...)
+{
+    DEenv$ProjOpt$md5 <- digest(h$input)
+    DEenv$ProjOpt$locked <- TRUE
+    enabled(DEenv$btEdit) <- FALSE
+    enabled(DEenv$btAdd) <- FALSE
+    enabled(DEenv$btDelete) <- FALSE
+    svalue(DEenv$btLock) <- gettext("Unlock", domain = "R-DataEntry")
+    SaveProject()
+}
+
+UnlockIt <- function(h, ...)
+{
+    md5 <- digest(h$input)
+    if(md5 == DEenv$ProjOpt$md5){
+        DEenv$ProjOpt$locked <- FALSE
+        enabled(DEenv$btEdit) <- TRUE
+        enabled(DEenv$btAdd) <- TRUE
+        enabled(DEenv$btDelete) <- TRUE
+        svalue(DEenv$btLock) <- gettext("Lock", domain = "R-DataEntry")
+        SaveProject()
+    } else {
+        gmessage(gettext("The password does not match the registered one.",
+                 domain = "R-DataEntry"), type = "warning")
+    }
+}
+
+LockUnlock <- function(...)
+{
+    if(DEenv$ProjOpt$locked){
+        ginput("Enter the password to edit the list of variables",
+               handler = UnlockIt)
+    } else {
+        ginput("Enter the password to lock the list of variables",
+               handler = LockIt)
+    }
+}
+
 UpdateVarList <- function()
 {
     DEenv$vlist[,] <- data.frame(Var = names(DEenv$Data),
@@ -114,9 +152,9 @@ VarListDlg <- function(...)
     names(DEenv$vlist) <- gettext("Variables", domain = "R-DataEntry")
     g1b <- ggroup(horizontal = TRUE, container = g1)
     addSpring(g1b)
-    btEdit <- gbutton(gettext("Edit", domain = "R-DataEntry"), container = g1b)
-    btDelete <- gbutton(gettext("Delete", domain = "R-DataEntry"), container = g1b)
-    btAdd <- gbutton(gettext("Add", domain = "R-DataEntry"), container = g1b)
+    DEenv$btEdit <- gbutton(gettext("Edit", domain = "R-DataEntry"), container = g1b)
+    DEenv$btDelete <- gbutton(gettext("Delete", domain = "R-DataEntry"), container = g1b)
+    DEenv$btAdd <- gbutton(gettext("Add", domain = "R-DataEntry"), container = g1b)
 
     addSpring(g2)
     btUp <- gbutton("^", container = g2)
@@ -149,17 +187,25 @@ VarListDlg <- function(...)
     addSpring(g3)
     g2b <- ggroup(horizontal = TRUE, container = g3)
     addSpring(g2b)
+    DEenv$btLock <- gbutton(gettext("Lock", domain = "R-DataEntry"), container = g2b)
     btClose <- gbutton(gettext("Close", domain = "R-DataEntry"), container = g2b)
 
-    addHandlerClicked(btEdit, function(...) AttrDlg(FALSE))
-    addHandlerClicked(btAdd, function(...) AttrDlg(TRUE))
-    addHandlerClicked(btDelete, DeleteVariable)
+    addHandlerClicked(DEenv$btEdit, function(...) AttrDlg(FALSE))
+    addHandlerClicked(DEenv$btAdd, function(...) AttrDlg(TRUE))
+    addHandlerClicked(DEenv$btDelete, DeleteVariable)
     addHandlerClicked(DEenv$vlist, ShowAttributes)
     addHandlerClicked(btUp, function(...) MoveUpDown(TRUE))
     addHandlerClicked(btDown, function(...) MoveUpDown(FALSE))
+    addHandlerClicked(DEenv$btLock, function(...) LockUnlock())
     addHandlerClicked(btClose, function(...) dispose(DEenv$varw))
 
     svalue(DEenv$vlist) <- "id"
     focus(DEenv$varw)
+    if(DEenv$ProjOpt$locked){
+        enabled(DEenv$btEdit) <- FALSE
+        enabled(DEenv$btAdd) <- FALSE
+        enabled(DEenv$btDelete) <- FALSE
+        svalue(DEenv$btLock) <- gettext("Unlock", domain = "R-DataEntry")
+    }
     visible(DEenv$varw) <- TRUE
 }

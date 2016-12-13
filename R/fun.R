@@ -99,12 +99,19 @@ GetAppOpt <- function()
 
 SetDefaultProjOpt <- function()
 {
-    if(is.null(DEenv$ProjOpt$size.roww)){
-        DEenv$ProjOpt <- list("droplist" = FALSE, "emptycell" = FALSE, "missv" = "NA")
-    } else {
-        DEenv$ProjOpt <- list("droplist" = FALSE, "emptycell" = FALSE,
-                              "missv" = "NA", "size.roww" = DEenv$ProjOpt$size.roww)
-    }
+    po <- list("droplist" = FALSE, "emptycell" = FALSE, "missv" = "NA")
+
+    # Do not reset some options:
+    if(!is.null(DEenv$ProjOpt$size.roww))
+        po$size.roww <- DEenv$ProjOpt$size.roww
+    if(!is.null(DEenv$ProjOpt$locked))
+        po$locked <- DEenv$ProjOpt$locked
+    else
+        po$locked <- FALSE
+    if(!is.null(DEenv$ProjOpt$md5))
+        po$md5 <- DEenv$ProjOpt$md5
+
+    DEenv$ProjOpt <- po
 }
 
 SaveProject <- function()
@@ -199,6 +206,10 @@ OpenProject <- function()
         DEenv$AppOpt$emptycell <- FALSE
     if(is.null(DEenv$ProjOpt$droplist))
         DEenv$AppOpt$missv <- "NA"
+    if(is.null(DEenv$ProjOpt$locked)){
+        DEenv$ProjOpt$locked <- FALSE
+        DEenv$ProjOpt$md5 <- ""
+    }
 
     if(is.null(DEenv$AppOpt))
         GetAppOpt()
