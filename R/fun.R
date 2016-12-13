@@ -163,6 +163,13 @@ OpenProject <- function()
     if(Encoding(path) != "UTF-8")
         Encoding(path) <- "UTF-8"
 
+    if(grepl("_backup_[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]\\.dte$", path)){
+        gmessage(sprintf(gettext("This is a backup file.\nIf you really want to use it, remove \"%s\" from its name.",
+                                 domain = "R-DataEntry"),
+                         sub(".*_backup_(.*)\\.dte", "_backup_\\1", path)), type = "error")
+        return(FALSE)
+    }
+
     objs <- load(path, envir = DEenv)
 
     # Check if the project is OK (it might have been manually edited):

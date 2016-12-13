@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DataEntry 0.9\n"
-"POT-Creation-Date: 2016-12-09 14:29\n"
+"POT-Creation-Date: 2016-12-13 08:30\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -269,6 +269,9 @@ msgid "Internal variable (created automatically)"
 msgstr ""
 
 msgid "Choose a project and click OK."
+msgstr ""
+
+msgid "This is a backup file.\nIf you really want to use it, remove \"%s\" from its name."
 msgstr ""
 
 msgid "If necessary, type 'DataEntry()' to start the application again."
