@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DataEntry 0.9\n"
-"POT-Creation-Date: 2016-12-13 08:30\n"
+"POT-Creation-Date: 2016-12-14 11:12\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -224,6 +224,15 @@ msgid "The maximum value of '%s' is '%s'"
 msgstr ""
 
 msgid "Invalid value: '%s'. Valid values are:\n%s"
+msgstr ""
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Lock"
+msgstr ""
+
+msgid "The password does not match the registered one."
 msgstr ""
 
 msgid "Cannot delete 'id'."
