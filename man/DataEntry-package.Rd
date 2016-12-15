@@ -67,6 +67,10 @@
   you are setting a project that will later be used by other people to enter
   data and you want to prevent that the attributes of the variables are
   accidentally changed.
+
+  Screenshot:
+
+  \figure{Screenshot.png}{DataEntry screenshot}
 }
 \author{
 \packageAuthor{DataEntry}

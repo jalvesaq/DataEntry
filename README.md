@@ -47,4 +47,4 @@ R package to make it easier to enter questionnaire data.
 
 ## Screenshot
 
-![DataEntry screenshot](https://raw.githubusercontent.com/jalvesaq/DataEntry/master/Screenshot.png "DataEntry screenshot")
+![DataEntry screenshot](https://raw.githubusercontent.com/jalvesaq/DataEntry/master/man/figures/Screenshot.png "DataEntry screenshot")
