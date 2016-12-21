@@ -17,7 +17,7 @@ RowDlg <- function(newrow = TRUE)
     g <- ggroup(horizontal = FALSE, container = DEenv$roww, use.scrollwindow = TRUE)
     l <- glayout(container = g, expand = TRUE)
     if(!newrow){
-        sid <- svalue(DEenv$dfview)
+        sid <- as.integer(svalue(DEenv$dfview))
         if(length(sid) == 0){
             gmessage(gettext("No row is selected.", domain = "R-DataEntry"),
                      type = "warning")
@@ -73,7 +73,7 @@ RowDlg <- function(newrow = TRUE)
         if(!newrow){
             onerow[1] <- sid
         } else {
-            DEenv$id <- DEenv$id + 1
+            DEenv$id <- as.integer(DEenv$id + 1)
             onerow[1] <- DEenv$id
         }
         names(onerow) <- "id"
@@ -81,10 +81,12 @@ RowDlg <- function(newrow = TRUE)
         varnames <- names(DEenv$Data)
         for(i in 2:ncol(DEenv$Data)){
             onerow[i] <- svalue(l[i-1, 2])
+            vattr <- varattr[[varnames[i]]]
+
+            # NA value
             if(onerow[i] == ""){
                 if(DEenv$ProjOpt$emptycell){
                     onerow[[i]] <- NA
-                    next
                 } else {
                     gmessage(gettext("No cell might be left empty.",
                                      domain = "R-DataEntry"))
@@ -94,9 +96,19 @@ RowDlg <- function(newrow = TRUE)
             }
             if(onerow[[i]] == DEenv$ProjOpt$missv){
                 onerow[[i]] <- NA
+            }
+            if(is.na(onerow[[i]])){
+                if(vattr[["class"]] == "factor")
+                    onerow[[i]] <- factor(NA, levels = 1:length(vattr[["valid.values"]]), labels = vattr[["valid.values"]])
+                else if(vattr[["class"]] == "numeric")
+                    onerow[[i]] <- as.numeric(NA)
+                else if(vattr[["class"]] == "integer")
+                    onerow[[i]] <- as.integer(NA)
+                else if(vattr[["class"]] == "character")
+                    onerow[[i]] <- as.character(NA)
                 next
             }
-            vattr <- varattr[[varnames[i]]]
+
             if(vattr[["class"]] == "integer"){
                 if(!IsNumericInt(onerow[i], "integer")){
                     focus(l[i-1, 2])

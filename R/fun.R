@@ -142,7 +142,7 @@ NewProject <- function()
 
     path <- paste0(path, ".dte")
     DEenv$fpath <- path
-    DEenv$id <- 0
+    DEenv$id <- as.integer(0)
     DEenv$Data <- data.frame(id = integer(0))
     DEenv$VarAttr <- list()
     DEenv$VarAttr[["id"]] <- list("label" = gettext("Internal variable (created automatically)", domain = "R-DataEntry"),
