@@ -77,3 +77,10 @@
 
 Maintainer: \packageMaintainer{DataEntry}
 }
+
+\examples{
+\donttest{
+# The command to open the gui application is:
+DataEntry()
+}
+}
