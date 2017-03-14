@@ -1,11 +1,12 @@
 Package: DataEntry
 Type: Package
 Title: Make it Easier to Enter Questionnaire Data
-Version: 0.9
-Date: 2016-11-05
+Version: 0.9-1
+Date: 2017-03-14
 Author: Jakson Aquino
 Maintainer: Jakson Aquino <jalvesaq@gmail.com>
 Depends: gWidgets, RGtk2, gWidgetsRGtk2, digest
+URL: https://github.com/jalvesaq/DataEntry
 Description: This is a GUI application for defining
   attributes and setting valid values of variables, and then,
   entering questionnaire data in a data.frame.
