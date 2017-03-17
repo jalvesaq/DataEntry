@@ -52,12 +52,11 @@ data.frame2csv <- function(x, fname, fieldsep, how)
         cat("  /DELIMITERS=\"", fieldsep, "\"\n", sep = "")
         cat("  /ARRANGEMENT=DELIMITED\n")
         cat("  /FIRSTCASE=2\n")
-        cat("  /IMPORTCASE=ALL\n")
         cat("  /VARIABLES=\n")
         for(column in x.names){
             cat("  ", column, " ", sep = "")
             xx <- x[[column]]
-            if(is.character(xx)) cat("A", max(nchar(xx)), "\n", sep = "")
+            if(is.character(xx)) cat("A", max(nchar(xx), na.rm = TRUE), "\n", sep = "")
             else if(is.factor(xx)){
                 nlevs <- length(levels(xx))
                 if(nlevs < 10) cat("F1.0\n")
@@ -65,9 +64,9 @@ data.frame2csv <- function(x, fname, fieldsep, how)
                 else if(nlevs > 99) cat("F3.0\n")
             } else if(is.numeric(xx)){
                 if(sum(grepl("(chron|dates|times)", class(xx))) > 0){
-                    cat("A", max(nchar(as.character(xx))), "\n", sep = "")
+                    cat("A", max(nchar(as.character(xx)), na.rm = TRUE), "\n", sep = "")
                 } else {
-                    cat("F", max(nchar(as.character(xx))), ".0\n", sep = "")
+                    cat("F", max(nchar(as.character(xx)), na.rm = TRUE), ".0\n", sep = "")
                 }
             } else cat("error: undefined type\n")
         }
