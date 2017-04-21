@@ -24,6 +24,7 @@ AttrDlg <- function(newvar = TRUE)
                      type = "warning")
             return(invisible(NULL))
         }
+        Encoding(nm) <- "UTF-8"
         lb <- DEenv$VarAttr[[nm]]$label
         cl <- DEenv$VarAttr[[nm]]$class
         if(is.na(DEenv$VarAttr[[nm]]$valid.values[1]))
@@ -122,6 +123,10 @@ AttrDlg <- function(newvar = TRUE)
         ma <- sub("^[ \t\r\n]*", "", svalue(edMax))
         ma <- sub("[ \t\r\n]*$", "", ma)
         ma <- sub("^NA$", "", ma)
+
+        Encoding(nm) <- "UTF-8"
+        Encoding(lb) <- "UTF-8"
+        Encoding(vv) <- "UTF-8"
 
         # Get "range of value" and "valid values" only when they are meaniful
         if(length(vv) == 0)
@@ -232,11 +237,13 @@ AttrDlg <- function(newvar = TRUE)
 
         if(cl == "character"){
             DEenv$Data[, nm] <- rep("", nrow(DEenv$Data))
+            Encoding(DEenv$Data[, nm]) <- "UTF-8"
         } else if(cl == "integer"){
             DEenv$Data[, nm] <- as.integer(rep(NA, nrow(DEenv$Data)))
         } else if(cl == "factor"){
             DEenv$Data[, nm] <- factor(rep(NA, nrow(DEenv$Data)),
                                        levels = 1:length(vv), labels = vv)
+            Encoding(levels(DEenv$Data[, nm])) <- "UTF-8"
         } else {
             DEenv$Data[, nm] <- as.numeric(rep(NA, nrow(DEenv$Data)))
         }

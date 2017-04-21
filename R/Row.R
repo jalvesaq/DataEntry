@@ -81,6 +81,7 @@ RowDlg <- function(newrow = TRUE)
         varnames <- names(DEenv$Data)
         for(i in 2:ncol(DEenv$Data)){
             onerow[i] <- svalue(l[i-1, 2])
+            Encoding(onerow[[i]]) <- "UTF-8"
             vattr <- varattr[[varnames[i]]]
 
             # NA value
