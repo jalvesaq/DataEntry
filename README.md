@@ -2,6 +2,10 @@
 
 R package to make it easier to enter questionnaire data.
 
+## Screenshot
+
+![DataEntry screenshot](https://raw.githubusercontent.com/jalvesaq/DataEntry/master/man/figures/Screenshot.png "DataEntry screenshot")
+
 ## Installation
 
 The package is on CRAN, but if you want to install this development version,
@@ -17,7 +21,7 @@ git clone https://github.com/jalvesaq/DataEntry.git
 In R:
 
 ```r
-# Start R and install DataEntry dependencies:
+# Install DataEntry dependencies:
 install.packages(c("gWidgets", "RGtk2", "gWidgetsRGtk2"))
 
 # Compile the translations:
@@ -25,6 +29,24 @@ tools::update_pkg_po("DataEntry")
 
 # Install the package:
 install.packages("DataEntry", repos = NULL, type = "source",
+                 INSTALL_opts = "--no-test-load")
+```
+
+If you do not want to use `git`, you may do the following in R instead:
+
+```r
+# Install DataEntry dependencies:
+install.packages(c("gWidgets", "RGtk2", "gWidgetsRGtk2"))
+
+# Donwload DataEntry from github:
+download.file("https://github.com/jalvesaq/DataEntry/archive/master.zip", "DataEntry_master.zip")
+unzip("DataEntry_master.zip")
+
+# Compile the translations:
+tools::update_pkg_po("DataEntry-master")
+
+# Install the package:
+install.packages("DataEntry-master", repos = NULL, type = "source",
                  INSTALL_opts = "--no-test-load")
 ```
 
@@ -42,7 +64,3 @@ install.packages("DataEntry", repos = NULL, type = "source",
 
   - The argument `INSTALL_opts = "--no-test-load"` is necessary only on
     Windows.
-
-## Screenshot
-
-![DataEntry screenshot](https://raw.githubusercontent.com/jalvesaq/DataEntry/master/man/figures/Screenshot.png "DataEntry screenshot")
