@@ -10,12 +10,6 @@ RowDlg <- function(newrow = TRUE)
         rm(list = "roww", envir = DEenv)
     }
 
-    DEenv$roww <- gwindow(ifelse(newrow,
-                                 gettext("Add row", domain = "R-DataEntry"),
-                                 gettext("Replace row", domain = "R-DataEntry")),
-                          handler = onDestroy, visible = FALSE)
-    g <- ggroup(horizontal = FALSE, container = DEenv$roww, use.scrollwindow = TRUE)
-    l <- glayout(container = g, expand = TRUE)
     if(!newrow){
         sid <- as.integer(svalue(DEenv$dfview))
         if(length(sid) == 0){
@@ -29,15 +23,23 @@ RowDlg <- function(newrow = TRUE)
         else
             srow <- sapply(srow, function(x) ifelse(is.na(x), DEenv$ProjOpt$missv, as.character(x)))
     }
+
+    DEenv$roww <- gwindow(ifelse(newrow,
+                                 gettext("Add row", domain = "R-DataEntry"),
+                                 gettext("Replace row", domain = "R-DataEntry")),
+                          handler = onDestroy, visible = FALSE)
+    g <- ggroup(horizontal = FALSE, container = DEenv$roww, use.scrollwindow = TRUE)
+    l <- glayout(container = g, expand = TRUE)
+
     for(i in 2:ncol(DEenv$Data)){
         icol <- names(DEenv$Data)[i]
         l[i-1, 1] <- paste0(icol, ":")
         if(newrow){
             if(DEenv$ProjOpt$droplist && !is.na(DEenv$VarAttr[[i]]$valid.values[1])){
                 if(DEenv$ProjOpt$emptycell)
-                    l[i-1, 2] <- gdroplist(c("", DEenv$VarAttr[[i]]$valid.values))
+                    l[i-1, 2] <- gcombobox(c("", DEenv$VarAttr[[i]]$valid.values))
                 else
-                    l[i-1, 2] <- gdroplist(c("", DEenv$VarAttr[[i]]$valid.values, DEenv$ProjOpt$missv))
+                    l[i-1, 2] <- gcombobox(c("", DEenv$VarAttr[[i]]$valid.values, DEenv$ProjOpt$missv))
             } else {
                 l[i-1, 2] <- gedit(width = 10)
             }
@@ -52,7 +54,7 @@ RowDlg <- function(newrow = TRUE)
                     warning(sprintf(gettext("Error trying to find \"%s\" as valid value of \"%s\".",
                                             domain = "R-DataEntry"), srow[icol], icol))
                 }
-                l[i-1, 2] <- gdroplist(items, selected = idx)
+                l[i-1, 2] <- gcombobox(items, selected = idx)
             } else {
                 l[i-1, 2] <- gedit(srow[icol], width = 10)
             }
@@ -89,9 +91,12 @@ RowDlg <- function(newrow = TRUE)
                 if(DEenv$ProjOpt$emptycell){
                     onerow[[i]] <- NA
                 } else {
-                    gmessage(gettext("No cell might be left empty.",
-                                     domain = "R-DataEntry"))
-                    focus(l[i-1, 2])
+                    # FIXME: The variable name will be unnecessary after the
+                    # focus bug is fixed in gWidgets2RGtk2.
+                    gmessage(paste0(varnames[i], ": ",
+                                    gettext("No cell might be left empty.",
+                                            domain = "R-DataEntry")))
+                    focus(l[i-1, 2]) # BUG: gWidgets2RGtk2 focus not working for either GEdit or GDroplist.
                     return(invisible(NULL))
                 }
             }
@@ -100,7 +105,9 @@ RowDlg <- function(newrow = TRUE)
             }
             if(is.na(onerow[[i]])){
                 if(vattr[["class"]] == "factor")
-                    onerow[[i]] <- factor(NA, levels = 1:length(vattr[["valid.values"]]), labels = vattr[["valid.values"]])
+                    onerow[[i]] <- factor(NA,
+                                          levels = 1:length(vattr[["valid.values"]]),
+                                          labels = vattr[["valid.values"]])
                 else if(vattr[["class"]] == "numeric")
                     onerow[[i]] <- as.numeric(NA)
                 else if(vattr[["class"]] == "integer")
@@ -143,8 +150,10 @@ RowDlg <- function(newrow = TRUE)
                         break
                     }
                 if(!is.valid){
-                    gmessage(sprintf(gettext("Invalid value: '%s'. Valid values are:\n%s", domain = "R-DataEntry"),
-                                     onerow[[i]], paste(vattr[["valid.values"]], collapse = "\n")))
+                    gmessage(sprintf(gettext("Invalid value for '%s': '%s'. Valid values are:\n%s",
+                                             domain = "R-DataEntry"),
+                                     varnames[i], onerow[[i]],
+                                     paste(vattr[["valid.values"]], collapse = "\n")))
                     focus(l[i-1, 2])
                     return(invisible(NULL))
                 }
@@ -190,12 +199,12 @@ RowDlg <- function(newrow = TRUE)
     if(!is.null(DEenv$AppOpt$font)){
         fnt <- pangoFontDescriptionFromString(DEenv$AppOpt$font)
         for(i in 2:ncol(DEenv$Data)){
-            gtkWidgetModifyFont(l[i-1, 1]@widget@widget, fnt)
-            gtkWidgetModifyFont(l[i-1, 2]@widget@widget, fnt)
-            gtkWidgetModifyFont(l[i-1, 3]@widget@widget, fnt)
+            gtkWidgetModifyFont(l[i-1, 1]@.xData$widget, fnt)
+            gtkWidgetModifyFont(l[i-1, 2]@.xData$widget, fnt)
+            gtkWidgetModifyFont(l[i-1, 3]@.xData$widget, fnt)
         }
-        gtkWidgetModifyFont(btCancel@widget@widget$getChildren()[[1]], fnt)
-        gtkWidgetModifyFont(btAdd@widget@widget$getChildren()[[1]], fnt)
+        gtkWidgetModifyFont(btCancel@.xData$widget$getChildren()[[1]], fnt)
+        gtkWidgetModifyFont(btAdd@.xData$widget$getChildren()[[1]], fnt)
     }
 
 

@@ -58,21 +58,27 @@ AttrDlg <- function(newvar = TRUE)
                       container = vbox, anchor = c(-1, 1))
     gseparator(container = vbox)
 
-    lbInt <- glabel(gettext("Set valid:", domain = "R-DataEntry"))
+    intBox <- ggroup(container = vbox)
+    lbInt <- glabel(gettext("Set valid:", domain = "R-DataEntry"), container = intBox)
     rdIntVal <- gradio(c(gettext("range", domain = "R-DataEntry"),
                          gettext("values", domain = "R-DataEntry")),
-                       selected = ifelse(vv == "", 1, 2), horizontal = TRUE)
+                       selected = ifelse(vv == "", 1, 2), horizontal = TRUE, container = intBox)
 
-    lbRng <- glabel(gettext("Valid range:", domain = "R-DataEntry"))
-    hbox1 <- ggroup()
-    lbMin <- glabel(gettext("Min:", domain = "R-DataEntry"), container = hbox1, anchor = c(-1, 0))
-    edMin <- gedit(mi, width = 6, container = hbox1, anchor = c(-1, 1))
-    lbMax <- glabel(gettext("Max:", domain = "R-DataEntry"), container = hbox1, anchor = c(-1, 0))
-    edMax <- gedit(ma, width = 6, container = hbox1, anchor = c(-1, 1))
+    rngBox <- ggroup(container = vbox)
+    lbRng <- glabel(gettext("Valid range:", domain = "R-DataEntry"), container = rngBox)
+    lbMin <- glabel(gettext("Min:", domain = "R-DataEntry"), container = rngBox, anchor = c(-1, 0))
+    edMin <- gedit(mi, width = 6, container = rngBox, anchor = c(-1, 1))
+    lbMax <- glabel(gettext("Max:", domain = "R-DataEntry"), container = rngBox, anchor = c(-1, 0))
+    edMax <- gedit(ma, width = 6, container = rngBox, anchor = c(-1, 1))
 
+    vvBox <- ggroup(horizontal = FALSE, container = vbox)
     lbVV <- glabel(gettext("Valid values (one per line):", domain = "R-DataEntry"),
-                   anchor = c(-1, 1))
-    txVV <- gtext(vv, width = 25, height = 100, anchor = c(-1, 1))
+                   anchor = c(-1, 1), container = vvBox)
+    txVV <- gtext(vv, width = 25, height = 100, anchor = c(-1, 1), container = vvBox)
+
+    visible(vvBox) <- FALSE
+    visible(intBox) <- FALSE
+    visible(rngBox) <- FALSE
 
     addSpring(vbox)
     hbox2 <- ggroup(container = vbox)
@@ -81,25 +87,15 @@ AttrDlg <- function(newvar = TRUE)
     btOK <- gbutton(gettext("OK", domain = "R-DataEntry"), container = hbox2)
 
     onClassChange <- function(...){
-        delete(vbox, lbInt)
-        delete(vbox, rdIntVal)
-        delete(vbox, lbRng)
-        delete(vbox, hbox1)
-        delete(vbox, lbVV)
-        delete(vbox, txVV)
-        delete(vbox, hbox2)
-        if(svalue(rdClass) == "integer"){
-            add(vbox, lbInt, anchor = c(-1, 1))
-            add(vbox, rdIntVal, anchor = c(-1, 1))
-        }
-        if(svalue(rdClass) == "numeric" || (svalue(rdClass) == "integer" && svalue(rdIntVal) == gettext("range", domain = "R-DataEntry"))){
-            add(vbox, lbRng, anchor = c(-1, 1))
-            add(vbox, hbox1)
-        } else if(svalue(rdClass) == "factor" || (svalue(rdClass) == "integer" && svalue(rdIntVal) == gettext("values", domain = "R-DataEntry"))){
-            add(vbox, lbVV, anchor = c(-1, 1))
-            add(vbox, txVV, anchor = c(-1, 1))
-        }
-        add(vbox, hbox2)
+        visible(vvBox) <- FALSE
+        visible(intBox) <- FALSE
+        visible(rngBox) <- FALSE
+        if(svalue(rdClass) == "integer")
+            visible(intBox) <- TRUE
+        if(svalue(rdClass) == "numeric" || (svalue(rdClass) == "integer" && svalue(rdIntVal) == gettext("range", domain = "R-DataEntry")))
+            visible(rngBox) <- TRUE
+        else if(svalue(rdClass) == "factor" || (svalue(rdClass) == "integer" && svalue(rdIntVal) == gettext("values", domain = "R-DataEntry")))
+            visible(vvBox) <- TRUE
     }
 
     onCancel <- function(...){
@@ -113,7 +109,8 @@ AttrDlg <- function(newvar = TRUE)
         lb <- sub("^[ \t\r\n]*", "", svalue(edLbl))
         lb <- sub("[ \t\r\n]*$", "", lb)
         cl <- svalue(rdClass)
-        vv <- strsplit(svalue(txVV), "\n")[[1]]
+        vv <- svalue(txVV)
+        vv <- strsplit(vv, "\n")[[1]]
         vv <- sub("^[ \t\n\r]*", "", vv)
         vv <- sub("[ \t\n\r]*$", "", vv)
         vv <- vv[vv != ""]
@@ -152,6 +149,12 @@ AttrDlg <- function(newvar = TRUE)
         }
         if(grepl("^[0-9]", nm)){
             gmessage(gettext("The variable name cannot begin with a number.",
+                             domain = "R-DataEntry"), type = "warning")
+            focus(edName)
+            return(invisible(NULL))
+        }
+        if(grepl(" ", nm)){
+            gmessage(gettext("The variable name cannot have empty spaces.",
                              domain = "R-DataEntry"), type = "warning")
             focus(edName)
             return(invisible(NULL))
@@ -264,23 +267,23 @@ AttrDlg <- function(newvar = TRUE)
 
     if(!is.null(DEenv$AppOpt$font)){
         fnt <- pangoFontDescriptionFromString(DEenv$AppOpt$font)
-        gtkWidgetModifyFont(lb1@widget@widget, fnt)
-        gtkWidgetModifyFont(edName@widget@widget, fnt)
-        gtkWidgetModifyFont(lb2@widget@widget, fnt)
-        gtkWidgetModifyFont(edLbl@widget@widget, fnt)
-        gtkWidgetModifyFont(lb3@widget@widget, fnt)
-        gtkWidgetModifyFont(rdClass@widget@widget$getChildren()[[1]], fnt) # FIXME: does not work for radio buttons
-        gtkWidgetModifyFont(lbInt@widget@widget, fnt)
-        gtkWidgetModifyFont(rdIntVal@widget@widget$getChildren()[[1]], fnt) # FIXME: does not work for radio buttons
-        gtkWidgetModifyFont(lbRng@widget@widget, fnt)
-        gtkWidgetModifyFont(lbMin@widget@widget, fnt)
-        gtkWidgetModifyFont(edMin@widget@widget, fnt)
-        gtkWidgetModifyFont(lbMax@widget@widget, fnt)
-        gtkWidgetModifyFont(edMax@widget@widget, fnt)
-        gtkWidgetModifyFont(lbVV@widget@widget, fnt)
-        gtkWidgetModifyFont(txVV@widget@widget, fnt)
-        gtkWidgetModifyFont(btCancel@widget@widget$getChildren()[[1]], fnt)
-        gtkWidgetModifyFont(btOK@widget@widget$getChildren()[[1]], fnt)
+        gtkWidgetModifyFont(lb1@.xData$widget, fnt)
+        gtkWidgetModifyFont(edName@.xData$widget, fnt)
+        gtkWidgetModifyFont(lb2@.xData$widget, fnt)
+        gtkWidgetModifyFont(edLbl@.xData$widget, fnt)
+        gtkWidgetModifyFont(lb3@.xData$widget, fnt)
+        # gtkWidgetModifyFont(rdClass@.xData$widget$getChildren()[[1]], fnt) # FIXME: does not work for radio buttons
+        gtkWidgetModifyFont(lbInt@.xData$widget, fnt)
+        # gtkWidgetModifyFont(rdIntVal@.xData$widget$getChildren()[[1]], fnt) # FIXME: does not work for radio buttons
+        gtkWidgetModifyFont(lbRng@.xData$widget, fnt)
+        gtkWidgetModifyFont(lbMin@.xData$widget, fnt)
+        gtkWidgetModifyFont(edMin@.xData$widget, fnt)
+        gtkWidgetModifyFont(lbMax@.xData$widget, fnt)
+        gtkWidgetModifyFont(edMax@.xData$widget, fnt)
+        gtkWidgetModifyFont(lbVV@.xData$widget, fnt)
+        gtkWidgetModifyFont(txVV@.xData$widget, fnt)
+        gtkWidgetModifyFont(btCancel@.xData$widget$getChildren()[[1]], fnt)
+        gtkWidgetModifyFont(btOK@.xData$widget$getChildren()[[1]], fnt)
     }
     visible(DEenv$attrw) <- TRUE
     focus(edName)

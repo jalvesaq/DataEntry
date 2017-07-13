@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DataEntry\n"
 "Report-Msgid-Bugs-To: https://github.com/jalvesaq/DataEntry/issues\n"
-"POT-Creation-Date: 2016-12-14 11:12\n"
-"PO-Revision-Date: 2016-12-14 11:15-0300\n"
+"POT-Creation-Date: 2017-07-13 12:10\n"
+"PO-Revision-Date: 2017-07-13 12:12-0300\n"
 "Last-Translator: Jakson Aquino <jalvesaq@gmail.com>\n"
 "Language-Team: pt <pt@li.org>\n"
 "Language: pt_BR\n"
@@ -60,6 +60,9 @@ msgstr "O nome da variável não pode ser vazio."
 msgid "The variable name cannot begin with a number."
 msgstr "O nome da variável não pode ser vazio."
 
+msgid "The variable name cannot have empty spaces."
+msgstr "O nome da variável não pode espaços vazios."
+
 msgid "Invalid character in the variable name."
 msgstr "Caractere inválido no nome da variável."
 
@@ -87,6 +90,12 @@ msgstr "Adicionar linha"
 msgid "Close"
 msgstr "Fechar"
 
+msgid "No row is selected."
+msgstr "Nenhuma linha está selecionada."
+
+msgid "ID \"%d\" not found. Please, select an item."
+msgstr "ID \"%d\" não encontrado. Selecione um item."
+
 msgid "Data exported to \"%s\""
 msgstr "Dados exportados para \"%s\""
 
@@ -108,11 +117,11 @@ msgstr "Copiar para a área de trabalho do R"
 msgid "Include the column \"id\""
 msgstr "Incluir a coluna \"id\""
 
-msgid "File name:"
-msgstr "Nome do arquivo:"
-
 msgid "Object name:"
 msgstr "Nome do objeto:"
+
+msgid "File name:"
+msgstr "Nome do arquivo:"
 
 msgid "How to write factor variables?"
 msgstr "Como salvar variáveis da classe factor?"
@@ -204,9 +213,6 @@ msgstr "Você tem que definir o texto indicador de valores omissos."
 msgid "Replace row"
 msgstr "Substituir linha"
 
-msgid "No row is selected."
-msgstr "Nenhuma linha está selecionada."
-
 msgid "Error trying to find \"%s\" as valid value of \"%s\"."
 msgstr "Erro tentando encontrar \"%s\" como valor válido de \"%s\"."
 
@@ -226,10 +232,10 @@ msgid "The maximum value of '%s' is '%s'"
 msgstr "O valor máximo de '%s' é '%s'"
 
 msgid ""
-"Invalid value: '%s'. Valid values are:\n"
+"Invalid value for '%s': '%s'. Valid values are:\n"
 "%s"
 msgstr ""
-"Valor inválido: '%s'. Valores válidos são:\n"
+"Valor inválido para '%s': '%s'. Os valores válidos são:\n"
 "%s"
 
 msgid "Unlock"

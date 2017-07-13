@@ -1,4 +1,4 @@
 export(DataEntry)
-import(gWidgets, RGtk2, gWidgetsRGtk2)
+import(gWidgets2, RGtk2, gWidgets2RGtk2)
 importFrom("utils", "capture.output", "packageVersion", "write.table")
 importFrom("digest", "digest")

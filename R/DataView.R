@@ -38,10 +38,18 @@ DataEntryDlg <- function(...)
 
     onBtDeleteClick <- function(...)
     {
-        n <- svalue(DEenv$dfview)
-        DEenv$Data <- DEenv$Data[DEenv$Data$id != n, ]
-        UpdateDFView()
-        SaveProject()
+        sid <- as.integer(svalue(DEenv$dfview))
+        if(length(sid) == 0){
+            gmessage(gettext("No row is selected.", domain = "R-DataEntry"),
+                     type = "warning")
+        } else if(sid %in% DEenv$Data$id){
+            DEenv$Data <- DEenv$Data[DEenv$Data$id != sid, ]
+            UpdateDFView()
+            SaveProject()
+        } else {
+            gmessage(sprintf(gettext('ID "%d" not found. Please, select an item.',
+                                     domain = "R-DataEntry"), sid), type = "warning")
+        }
     }
 
     addHandlerClicked(btEdit,   function(...) RowDlg(FALSE))

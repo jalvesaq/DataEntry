@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: DataEntry 0.9\n"
-"POT-Creation-Date: 2016-12-14 11:12\n"
+"Project-Id-Version: DataEntry 0.9-2\n"
+"POT-Creation-Date: 2017-07-13 12:10\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,6 +58,9 @@ msgstr ""
 msgid "The variable name cannot begin with a number."
 msgstr ""
 
+msgid "The variable name cannot have empty spaces."
+msgstr ""
+
 msgid "Invalid character in the variable name."
 msgstr ""
 
@@ -85,6 +88,12 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+msgid "No row is selected."
+msgstr ""
+
+msgid "ID \"%d\" not found. Please, select an item."
+msgstr ""
+
 msgid "Data exported to \"%s\""
 msgstr ""
 
@@ -106,10 +115,10 @@ msgstr ""
 msgid "Include the column \"id\""
 msgstr ""
 
-msgid "File name:"
+msgid "Object name:"
 msgstr ""
 
-msgid "Object name:"
+msgid "File name:"
 msgstr ""
 
 msgid "How to write factor variables?"
@@ -202,9 +211,6 @@ msgstr ""
 msgid "Replace row"
 msgstr ""
 
-msgid "No row is selected."
-msgstr ""
-
 msgid "Error trying to find \"%s\" as valid value of \"%s\"."
 msgstr ""
 
@@ -223,7 +229,7 @@ msgstr ""
 msgid "The maximum value of '%s' is '%s'"
 msgstr ""
 
-msgid "Invalid value: '%s'. Valid values are:\n%s"
+msgid "Invalid value for '%s': '%s'. Valid values are:\n%s"
 msgstr ""
 
 msgid "Unlock"

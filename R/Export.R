@@ -36,41 +36,40 @@ ExportDlg <- function(...)
                        selected = DEenv$AppOpt$exphow, horizontal = FALSE, container = g)
     cbExpid <- gcheckbox(gettext("Include the column \"id\"",
                                  domain = "R-DataEntry"), checked = DEenv$AppOpt$expid, container = g)
-    gn <- ggroup(horizontal = FALSE, container = g)
 
-    gfn <- ggroup()
     nm <-  sub(".dte$", "", basename(DEenv$fpath))
-    lbFnm <- glabel(gettext("File name:", domain = "R-DataEntry"), container = gfn)
-    edFnm <- gedit(nm, width = 20, container = gfn)
-
-    gon <- ggroup()
     nm <- gsub("[[:punct:]]", ".", nm)
     nm <- gsub("[ \t]", ".", nm)
+
+    gon <- ggroup(container = g)
     lbObnm <- glabel(gettext("Object name:", domain = "R-DataEntry"), container = gon)
     edObnm <- gedit(nm, width = 20, container = gon)
 
+    gfn <- ggroup(container = g)
+    lbFnm <- glabel(gettext("File name:", domain = "R-DataEntry"), container = gfn)
+    edFnm <- gedit(nm, width = 20, container = gfn)
+
     gcsv <- ggroup(horizontal = FALSE, container = g)
-    lbFac <- glabel(gettext("How to write factor variables?",
-                            domain = "R-DataEntry"), anchor = c(-1, 1))
+    lbFac <- glabel(gettext("How to write factor variables?", domain = "R-DataEntry"),
+                    anchor = c(-1, 1), container = gcsv)
     rdExpfct <- gradio(c(gettext("As character", domain = "R-DataEntry"),
                          gettext("As integer + R script", domain = "R-DataEntry"),
                          gettext("As integer + SPSS script", domain = "R-DataEntry")),
-                       selected = DEenv$AppOpt$expfct, horizontal = FALSE)
-
-    lbSep <- glabel(gettext("What field separator should be used?",
-                            domain = "R-DataEntry"), anchor = c(-1, 1))
+                       container = gcsv, selected = DEenv$AppOpt$expfct, horizontal = FALSE)
+    lbSep <- glabel(gettext("What field separator should be used?", domain = "R-DataEntry"),
+                    container = gcsv, anchor = c(-1, 1))
     rdExpsep <- gradio(c(gettext("Comma", domain = "R-DataEntry"),
                          gettext("Semicolon", domain = "R-DataEntry"),
                          gettext("Tab", domain = "R-DataEntry")),
-                       selected = DEenv$AppOpt$expsep, horizontal = FALSE)
+                       container = gcsv, selected = DEenv$AppOpt$expsep, horizontal = FALSE)
 
     grda <- ggroup(horizontal = FALSE, container = g)
-    lbLbl <- glabel(gettext("What to do with variable labels?",
-                            domain = "R-DataEntry"))
+    lbLbl <- glabel(gettext("What to do with variable labels?", domain = "R-DataEntry"),
+                    container = grda, anchor = c(-1, 1))
     rdExplbl <- gradio(c(gettext("Nothing", domain = "R-DataEntry"),
                          gettext("Add a \"variable.labels\" attribute to the data.frame", domain = "R-DataEntry"),
                          gettext("Add a \"label\" attribute to each column", domain = "R-DataEntry")),
-                       selected = DEenv$AppOpt$explbl, horizontal = FALSE)
+                       container = grda, selected = DEenv$AppOpt$explbl, horizontal = FALSE)
 
     addSpring(g)
     gbt <- ggroup(container = g)
@@ -80,26 +79,27 @@ ExportDlg <- function(...)
 
     ShowHide <- function(...)
     {
-        delete(gn, gfn)
-        delete(gn, gon)
-        delete(gcsv, lbFac)
-        delete(gcsv, rdExpfct)
-        delete(gcsv, lbSep)
-        delete(gcsv, rdExpsep)
-        delete(grda, lbLbl)
-        delete(grda, rdExplbl)
-        if(svalue(rdExphow, index = TRUE) < 3)
-            add(gn, gfn)
-        if(svalue(rdExphow, index = TRUE) > 1)
-            add(gn, gon)
-        if(svalue(rdExphow, index = TRUE) == 1){
-            add(gcsv, lbFac, anchor = c(-1, 1))
-            add(gcsv, rdExpfct)
-            add(gcsv, lbSep, anchor = c(-1, 1))
-            add(gcsv, rdExpsep)
+        exphow <- svalue(rdExphow, index = TRUE)
+        visible(gfn) <- FALSE
+        visible(gon) <- FALSE
+        visible(lbFac) <- FALSE
+        visible(rdExpfct) <- FALSE
+        visible(lbSep) <- FALSE
+        visible(rdExpsep) <- FALSE
+        visible(lbLbl) <- FALSE
+        visible(rdExplbl) <- FALSE
+        if(exphow < 3)
+            visible(gfn) <- TRUE
+        if(exphow > 1)
+            visible(gon) <- TRUE
+        if(exphow == 1){
+            visible(lbFac) <- TRUE
+            visible(rdExpfct) <- TRUE
+            visible(lbSep) <- TRUE
+            visible(rdExpsep) <- TRUE
         } else {
-            add(grda, lbLbl, anchor = c(-1, 1))
-            add(grda, rdExplbl)
+            visible(lbLbl) <- TRUE
+            visible(rdExplbl) <- TRUE
         }
     }
 

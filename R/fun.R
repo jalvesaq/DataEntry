@@ -132,9 +132,7 @@ NewProject <- function()
                                                          domain = "R-DataEntry"),
                                           filter = list("DataEntry files" = list(patterns = "*.dte"))),
                             silent = TRUE))
-    if(!exists("path"))
-        return(FALSE)
-    if(path == "")
+    if(!exists("path") || length(path) == 0 || path == "")
         return(FALSE)
 
     if(Encoding(path) != "UTF-8")
@@ -162,9 +160,7 @@ OpenProject <- function()
                                                          domain = "R-DataEntry"),
                                           filter = list("DataEntry files" = list(patterns = "*.dte"))),
                             silent = TRUE))
-    if(!exists("path"))
-        return(FALSE)
-    if(path == "")
+    if(!exists("path") || length(path) == 0 || path == "")
         return(FALSE)
 
     if(Encoding(path) != "UTF-8")

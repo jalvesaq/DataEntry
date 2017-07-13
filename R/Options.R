@@ -19,19 +19,26 @@ OptionsDlg <- function(...)
     g <- ggroup(horizontal = FALSE, container = DEenv$optw)
 
     p <- gframe(gettext("Project options", domain = "R-DataEntry"),
-                horizontal = FALSE)
-
-    cbDrop <- gcheckbox(gettext("Put valid values in dropdown list", domain = "R-DataEntry"),
-                        checked = DEenv$ProjOpt$droplist, container = p)
-    cbEmpty <- gcheckbox(gettext("Allow blank cells", domain = "R-DataEntry"),
-                         checked = DEenv$ProjOpt$emptycell, container = p)
-    gm <- ggroup(container = p)
-    glabel(gettext("Text representing missing values: ", domain = "R-DataEntry"),
-           container = gm, anchor = c(-1, 1))
-    edMissV <- gedit(DEenv$ProjOpt$missv, width = 4, container = gm)
-
-    if(!is.null(DEenv$VarAttr))
-        add(g, p)
+                horizontal = FALSE, container = g)
+    if(is.null(DEenv$ProjOpt)){
+        cbDrop <- gcheckbox(gettext("Put valid values in dropdown list", domain = "R-DataEntry"),
+                            checked = DEenv$ProjOpt$droplist, container = p)
+        cbEmpty <- gcheckbox(gettext("Allow blank cells", domain = "R-DataEntry"),
+                             checked = DEenv$ProjOpt$emptycell, container = p)
+        gm <- ggroup(container = p)
+        glabel(gettext("Text representing missing values: ", domain = "R-DataEntry"),
+               container = gm, anchor = c(-1, 1))
+        edMissV <- gedit("", width = 4, container = gm)
+    } else {
+        cbDrop <- gcheckbox(gettext("Put valid values in dropdown list", domain = "R-DataEntry"),
+                            checked = FALSE, container = p)
+        cbEmpty <- gcheckbox(gettext("Allow blank cells", domain = "R-DataEntry"),
+                             checked = FALSE, container = p)
+        gm <- ggroup(container = p)
+        glabel(gettext("Text representing missing values: ", domain = "R-DataEntry"),
+               container = gm, anchor = c(-1, 1))
+        edMissV <- gedit(DEenv$ProjOpt$missv, width = 4, container = gm)
+    }
 
     a <- gframe(gettext("Application options", domain = "R-DataEntry"),
                 horizontal = FALSE, container = g)
@@ -50,8 +57,8 @@ OptionsDlg <- function(...)
                            checked = DEenv$AppOpt$bckopen, container = a)
     cbBckLast <- gcheckbox(gettext("Keep only the last backups",
                                    domain = "R-DataEntry"),
-                           checked = DEenv$AppOpt$bcklast)
-    g1 <- ggroup()
+                           checked = DEenv$AppOpt$bcklast, container = a)
+    g1 <- ggroup(container = g)
     lbNBck <- glabel(gettext("Number of backups to keep: ", domain = "R-DataEntry"),
                      container = g1, anchor = c(-1, 1))
     edNBcks <- gedit(as.character(DEenv$AppOpt$nbcks), width = 3, container = g1)
@@ -91,7 +98,7 @@ OptionsDlg <- function(...)
         if(oldfont != btFont$GetFontName()){
             DEenv$AppOpt$font <- btFont$GetFontName()
             font <- pangoFontDescriptionFromString(DEenv$AppOpt$font)
-            gtkWidgetModifyFont(DEenv$mainw@widget@widget, font)
+            gtkWidgetModifyFont(DEenv$mainw@.xData$widget, font)
         }
 
         if(!is.null(DEenv$VarAttr)){
@@ -109,20 +116,24 @@ OptionsDlg <- function(...)
 
     ShowHide <- function(...)
     {
-        delete(a, cbBckLast)
-        delete(a, g1)
-        delete(p, gm)
+        visible(cbBckLast) <- FALSE
+        visible(g1) <- FALSE
+        visible(gm) <- FALSE
+        if(is.null(DEenv$ProjOpt))
+            visible(p) <- FALSE
+        else
+            visible(p) <- TRUE
         if(!svalue(cbEmpty))
-            add(p, gm)
+            visible(gm) <- TRUE
         if(svalue(cbBckOpen)){
-            add(a, cbBckLast)
+            visible(cbBckLast) <- TRUE
             if(svalue(cbBckLast))
-                add(a, g1)
+                visible(g1) <- TRUE
             else
-                delete(a, g1)
+                visible(g1) <- FALSE
         } else {
-            delete(a, cbBckLast)
-            delete(a, g1)
+            visible(cbBckLast) <- FALSE
+            visible(g1) <- FALSE
         }
     }
 

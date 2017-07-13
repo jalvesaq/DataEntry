@@ -36,14 +36,23 @@ DataEntry <- function()
     btOpt <- gbutton(gettext("Options", domain = "R-DataEntry"), container = g)
     btClose <- gbutton(gettext("Close", domain = "R-DataEntry"), container = g)
 
+    # Avoid bug in gWidgets2RGtk2: click event is triggered when the button is clicked
+    DEenv$is.changing.label <- 0
+
     onBt1Click <- function(...)
     {
+        if(DEenv$is.changing.label)
+            return()
         if(svalue(bt1) == gettext("New project", domain = "R-DataEntry")){
             if(NewProject()){
+                DEenv$is.changing.label <- 1
                 svalue(bt1) <- gettext("Set variables", domain = "R-DataEntry")
                 svalue(bt2) <- gettext("Edit data", domain = "R-DataEntry")
                 enabled(btExp) <- TRUE
                 focus(bt1)
+                DEenv$is.changing.label <- 0
+                svalue(DEenv$mainw) <- paste("DataEntry -",
+                                             basename(DEenv$fpath))
             }
         } else {
             if(!is.null(DEenv$Data))
@@ -53,13 +62,19 @@ DataEntry <- function()
 
     onBt2Click <- function(...)
     {
+        if(DEenv$is.changing.label)
+            return()
         if(svalue(bt2) == gettext("Open project", domain = "R-DataEntry")){
             if(OpenProject()){
+                DEenv$is.changing.label <- 1
                 svalue(bt1) <- gettext("Set variables", domain = "R-DataEntry")
                 svalue(bt2) <- gettext("Edit data", domain = "R-DataEntry")
                 enabled(btExp) <- TRUE
                 if(length(names(DEenv$Data)) < 2)
                     focus(bt1)
+                DEenv$is.changing.label <- 0
+                svalue(DEenv$mainw) <- paste("DataEntry -",
+                                             basename(DEenv$fpath))
             }
         } else {
             if(!is.null(DEenv$Data))

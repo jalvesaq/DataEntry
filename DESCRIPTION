@@ -5,7 +5,7 @@ Version: 0.9-2
 Date: 2017-04-21
 Author: Jakson Aquino
 Maintainer: Jakson Aquino <jalvesaq@gmail.com>
-Depends: gWidgets, RGtk2, gWidgetsRGtk2, digest
+Depends: gWidgets2, RGtk2, gWidgets2RGtk2, digest
 URL: https://github.com/jalvesaq/DataEntry
 Description: This is a GUI application for defining
   attributes and setting valid values of variables, and then,
