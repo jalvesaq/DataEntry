@@ -22,7 +22,7 @@ In R:
 
 ```r
 # Install DataEntry dependencies:
-install.packages(c("gWidgets", "RGtk2", "gWidgetsRGtk2"))
+install.packages(c("gWidgets2", "RGtk2", "gWidgets2RGtk2"))
 
 # Compile the translations:
 tools::update_pkg_po("DataEntry")
@@ -36,7 +36,7 @@ If you do not want to use `git`, you may do the following in R instead:
 
 ```r
 # Install DataEntry dependencies:
-install.packages(c("gWidgets", "RGtk2", "gWidgetsRGtk2"))
+install.packages(c("gWidgets2", "RGtk2", "gWidgets2RGtk2"))
 
 # Donwload DataEntry from github:
 download.file("https://github.com/jalvesaq/DataEntry/archive/master.zip", "DataEntry_master.zip")
