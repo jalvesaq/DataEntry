@@ -162,28 +162,26 @@ VarListDlg <- function(...)
     btDown <- gbutton("v", container = g2)
     addSpring(g2)
 
-    DEenv$aNm <- glabel(anchor = c(-1, 1))
-    DEenv$aLb <- glabel(anchor = c(-1, 1))
-    DEenv$aCl <- glabel(anchor = c(-1, 1))
-    DEenv$aMi <- glabel(anchor = c(-1, 1))
-    DEenv$aMa <- glabel(anchor = c(-1, 1))
-    DEenv$aVv <- glabel(anchor = c(-1, 1))
 
-    # FIXME: The labels are center aligned
-    f <- gframe(gettext("Attributes", domain = "R-DataEntry"), horizontal = FALSE, container = g3)
-    lt <- glayout(container = f)
-    lt[1, 1] <- gettext("Name:", domain = "R-DataEntry")
-    lt[1, 2] <- DEenv$aNm
-    lt[2, 1] <- gettext("Label:", domain = "R-DataEntry")
-    lt[2, 2] <- DEenv$aLb
-    lt[3, 1] <- gettext("Class:", domain = "R-DataEntry")
-    lt[3, 2] <- DEenv$aCl
-    lt[4, 1] <- gettext("Min:", domain = "R-DataEntry")
-    lt[4, 2] <- DEenv$aMi
-    lt[5, 1] <- gettext("Max:", domain = "R-DataEntry")
-    lt[5, 2] <- DEenv$aMa
-    lt[6, 1] <- gettext("Valid values:", domain = "R-DataEntry")
-    lt[6, 2] <- DEenv$aVv
+    f <- gframe(gettext("Attributes", domain = "R-DataEntry"), horizontal = TRUE, container = g3)
+    gnm <- ggroup(horizontal = FALSE, container = f, spacing = 10)
+    glabel(" ", container = f) # space between columns
+    glb <- ggroup(horizontal = FALSE, container = f, spacing = 10)
+
+    glabel(gettext("Name:", domain = "R-DataEntry"), container = gnm, anchor = c(-1, 1))
+    glabel(gettext("Label:", domain = "R-DataEntry"), container = gnm, anchor = c(-1, 1))
+    glabel(gettext("Class:", domain = "R-DataEntry"), container = gnm, anchor = c(-1, 1))
+    glabel(gettext("Min:", domain = "R-DataEntry"), container = gnm, anchor = c(-1, 1))
+    glabel(gettext("Max:", domain = "R-DataEntry"), container = gnm, anchor = c(-1, 1))
+    glabel(gettext("Valid values:", domain = "R-DataEntry"), container = gnm, anchor = c(-1, 1))
+
+    DEenv$aNm <- glabel(container = glb, anchor = c(-1, 1))
+    DEenv$aLb <- glabel(container = glb, anchor = c(-1, 1))
+    DEenv$aCl <- glabel(container = glb, anchor = c(-1, 1))
+    DEenv$aMi <- glabel(container = glb, anchor = c(-1, 1))
+    DEenv$aMa <- glabel(container = glb, anchor = c(-1, 1))
+    DEenv$aVv <- glabel(container = glb, anchor = c(-1, 1))
+
 
     addSpring(g3)
     g2b <- ggroup(horizontal = TRUE, container = g3)
