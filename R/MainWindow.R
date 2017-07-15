@@ -2,7 +2,7 @@
 DataEntry <- function()
 {
     if(!is.null(DEenv$mainw)){
-        focus(DEenv$mainw)
+        focus(DEenv$mainw) <- TRUE
         return(invisible(NULL))
     }
 
@@ -49,7 +49,7 @@ DataEntry <- function()
                 svalue(bt1) <- gettext("Set variables", domain = "R-DataEntry")
                 svalue(bt2) <- gettext("Edit data", domain = "R-DataEntry")
                 enabled(btExp) <- TRUE
-                focus(bt1)
+                focus(bt1) <- TRUE
                 DEenv$is.changing.label <- 0
                 svalue(DEenv$mainw) <- paste("DataEntry -",
                                              basename(DEenv$fpath))
@@ -71,7 +71,7 @@ DataEntry <- function()
                 svalue(bt2) <- gettext("Edit data", domain = "R-DataEntry")
                 enabled(btExp) <- TRUE
                 if(length(names(DEenv$Data)) < 2)
-                    focus(bt1)
+                    focus(bt1) <- TRUE
                 DEenv$is.changing.label <- 0
                 svalue(DEenv$mainw) <- paste("DataEntry -",
                                              basename(DEenv$fpath))

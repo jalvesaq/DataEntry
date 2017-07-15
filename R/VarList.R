@@ -86,7 +86,7 @@ ShowAttributes <- function(...)
 MoveUpDown <- function(up)
 {
     nm <- svalue(DEenv$vlist)
-    focus(DEenv$varw)
+    focus(DEenv$varw) <- TRUE
     if(length(nm) == 0){
         gmessage(gettext("No variable is selected.",
                          domain = "R-DataEntry"), type = "warning")
@@ -124,14 +124,14 @@ MoveUpDown <- function(up)
     UpdateVarList()
     Sys.sleep(0.1)
     svalue(DEenv$vlist, index = TRUE) <- ifelse(up, s-1, s+1)
-    focus(DEenv$vlist)
+    focus(DEenv$vlist) <- TRUE
     SaveProject()
 }
 
 VarListDlg <- function(...)
 {
     if(!is.null(DEenv$varw)){
-        focus(DEenv$varw)
+        focus(DEenv$varw) <- TRUE
         return(invisible(NULL))
     }
     onDestroy <- function(...)
@@ -201,7 +201,7 @@ VarListDlg <- function(...)
     addHandlerClicked(btClose, function(...) dispose(DEenv$varw))
 
     svalue(DEenv$vlist) <- "id"
-    focus(DEenv$varw)
+    focus(DEenv$varw) <- TRUE
     if(DEenv$ProjOpt$locked){
         enabled(DEenv$btEdit) <- FALSE
         enabled(DEenv$btAdd) <- FALSE

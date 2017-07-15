@@ -2,7 +2,7 @@
 AttrDlg <- function(newvar = TRUE)
 {
     if(!is.null(DEenv$attrw)){
-        focus(DEenv$attrw)
+        focus(DEenv$attrw) <- TRUE
         return(invisible(NULL))
     }
     onDestroy <- function(...)
@@ -144,25 +144,25 @@ AttrDlg <- function(newvar = TRUE)
         if(nchar(nm) == 0){
             gmessage(gettext("The variable name cannot be empty.",
                              domain = "R-DataEntry"), type = "warning")
-            focus(edName)
+            focus(edName) <- TRUE
             return(invisible(NULL))
         }
         if(grepl("^[0-9]", nm)){
             gmessage(gettext("The variable name cannot begin with a number.",
                              domain = "R-DataEntry"), type = "warning")
-            focus(edName)
+            focus(edName) <- TRUE
             return(invisible(NULL))
         }
         if(grepl(" ", nm)){
             gmessage(gettext("The variable name cannot have empty spaces.",
                              domain = "R-DataEntry"), type = "warning")
-            focus(edName)
+            focus(edName) <- TRUE
             return(invisible(NULL))
         }
         if(grepl("[@#$%^&*(){}<>?|/\\+=,;:'\"`~]", nm) || grepl("-", nm) || grepl("\\[", nm) || grepl("\\]", nm)){
             gmessage(gettext("Invalid character in the variable name.",
                              domain = "R-DataEntry"), type = "warning")
-            focus(edName)
+            focus(edName) <- TRUE
             return(invisible(NULL))
         }
 
@@ -170,7 +170,7 @@ AttrDlg <- function(newvar = TRUE)
         if(nchar(lb) > 80){
             gmessage(gettext("The variable label must have at most 80 characters.",
                              domain = "R-DataEntry"), type = "warning")
-            focus(edLbl)
+            focus(edLbl) <- TRUE
             return(invisible(NULL))
         }
 
@@ -178,11 +178,11 @@ AttrDlg <- function(newvar = TRUE)
         if(cl == "numeric" || (cl == "integer" && svalue(rdIntVal) == gettext("range", domain = "R-DataEntry"))){
             vv <- NA
             if(!is.na(mi) && mi != "" && !IsNumericInt(mi, cl)){
-                focus(edMin)
+                focus(edMin) <- TRUE
                 return(invisible(NULL))
             }
             if(!is.na(ma) && ma != "" && !IsNumericInt(mi, cl)){
-                focus(edMin)
+                focus(edMin) <- TRUE
                 return(invisible(NULL))
             }
             if(cl == "numeric"){
@@ -198,7 +198,7 @@ AttrDlg <- function(newvar = TRUE)
             ma <- NA
             for(v in vv){
                 if(!IsNumericInt(v, cl)){
-                    focus(txVV)
+                    focus(txVV) <- TRUE
                     return(invisible(NULL))
                 }
             }
@@ -213,7 +213,7 @@ AttrDlg <- function(newvar = TRUE)
                                       domain = "R-DataEntry"),
                              paste(vv[duplicated(vv)], collapse = "\n")),
                      type = "warning")
-            focus(txVV)
+            focus(txVV) <- TRUE
             return(invisible(NULL))
         }
 
@@ -221,7 +221,7 @@ AttrDlg <- function(newvar = TRUE)
         if(cl == "factor" && (length(vv) == 0 || is.na(vv[1]))){
             gmessage(gettext("Factors must have valid values defined.",
                              domain = "R-DataEntry"), type = "warning")
-            focus(txVV)
+            focus(txVV) <- TRUE
             return(invisible(NULL))
         }
 
@@ -286,5 +286,5 @@ AttrDlg <- function(newvar = TRUE)
         gtkWidgetModifyFont(btOK@.xData$widget$getChildren()[[1]], fnt)
     }
     visible(DEenv$attrw) <- TRUE
-    focus(edName)
+    focus(edName) <- TRUE
 }

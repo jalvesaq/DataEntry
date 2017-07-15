@@ -16,7 +16,7 @@ ExportCSV <- function(fname, sep, how, keepid)
 ExportDlg <- function(...)
 {
     if(!is.null(DEenv$expw)){
-        focus(DEenv$expw)
+        focus(DEenv$expw) <- TRUE
         return(invisible(NULL))
     }
 
@@ -150,5 +150,5 @@ ExportDlg <- function(...)
     addHandlerClicked(btOk, onOKclick)
     ShowHide()
     visible(DEenv$expw) <- TRUE
-    focus(btCancel)
+    focus(btCancel) <- TRUE
 }

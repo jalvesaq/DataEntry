@@ -2,7 +2,7 @@
 RowDlg <- function(newrow = TRUE)
 {
     if(!is.null(DEenv$roww)){
-        focus(DEenv$roww)
+        focus(DEenv$roww) <- TRUE
         return(invisible(NULL))
     }
     onDestroy <- function(...)
@@ -30,6 +30,7 @@ RowDlg <- function(newrow = TRUE)
                           handler = onDestroy, visible = FALSE)
     g <- ggroup(horizontal = FALSE, container = DEenv$roww, use.scrollwindow = TRUE)
     l <- glayout(container = g, expand = TRUE)
+    ilist <- list()
 
     for(i in 2:ncol(DEenv$Data)){
         icol <- names(DEenv$Data)[i]
@@ -37,11 +38,11 @@ RowDlg <- function(newrow = TRUE)
         if(newrow){
             if(DEenv$ProjOpt$droplist && !is.na(DEenv$VarAttr[[i]]$valid.values[1])){
                 if(DEenv$ProjOpt$emptycell)
-                    l[i-1, 2] <- gcombobox(c("", DEenv$VarAttr[[i]]$valid.values))
+                    ilist[[i-1]] <- gcombobox(c("", DEenv$VarAttr[[i]]$valid.values))
                 else
-                    l[i-1, 2] <- gcombobox(c("", DEenv$VarAttr[[i]]$valid.values, DEenv$ProjOpt$missv))
+                    ilist[[i-1]] <- gcombobox(c("", DEenv$VarAttr[[i]]$valid.values, DEenv$ProjOpt$missv))
             } else {
-                l[i-1, 2] <- gedit(width = 10)
+                ilist[[i-1]] <- gedit(width = 10)
             }
         } else {
             if(DEenv$ProjOpt$droplist && !is.na(DEenv$VarAttr[[i]]$valid.values[1])){
@@ -54,11 +55,12 @@ RowDlg <- function(newrow = TRUE)
                     warning(sprintf(gettext("Error trying to find \"%s\" as valid value of \"%s\".",
                                             domain = "R-DataEntry"), srow[icol], icol))
                 }
-                l[i-1, 2] <- gcombobox(items, selected = idx)
+                ilist[[i-1]] <- gcombobox(items, selected = idx)
             } else {
-                l[i-1, 2] <- gedit(srow[icol], width = 10)
+                ilist[[i-1]] <- gedit(srow[icol], width = 10)
             }
         }
+        l[i-1, 2] <- ilist[[i-1]]
         l[i-1, 3] <- DEenv$VarAttr[[icol]]$label
     }
     g1 <- ggroup(container = g)
@@ -91,12 +93,9 @@ RowDlg <- function(newrow = TRUE)
                 if(DEenv$ProjOpt$emptycell){
                     onerow[[i]] <- NA
                 } else {
-                    # FIXME: The variable name will be unnecessary after the
-                    # focus bug is fixed in gWidgets2RGtk2.
-                    gmessage(paste0(varnames[i], ": ",
-                                    gettext("No cell might be left empty.",
-                                            domain = "R-DataEntry")))
-                    focus(l[i-1, 2]) # BUG: gWidgets2RGtk2 focus not working for either GEdit or GDroplist.
+                    gmessage(gettext("No cell might be left empty.",
+                                     domain = "R-DataEntry"))
+                    focus(ilist[[i-1]])
                     return(invisible(NULL))
                 }
             }
@@ -119,13 +118,13 @@ RowDlg <- function(newrow = TRUE)
 
             if(vattr[["class"]] == "integer"){
                 if(!IsNumericInt(onerow[i], "integer")){
-                    focus(l[i-1, 2])
+                    focus(ilist[[i-1]]) <- TRUE
                     return(invisible(NULL))
                 }
                 onerow[[i]] <- as.integer(onerow[[i]])
             } else if(vattr[["class"]] == "numeric"){
                 if(!IsNumericInt(onerow[i], "numeric")){
-                    focus(l[i-1, 2])
+                    focus(ilist[[i-1]]) <- TRUE
                     return(invisible(NULL))
                 }
                 onerow[[i]] <- as.numeric(onerow[[i]])
@@ -133,13 +132,13 @@ RowDlg <- function(newrow = TRUE)
             if(!is.na(vattr[["min"]]) && onerow[[i]] < vattr[["min"]]){
                 gmessage(sprintf(gettext("The minimum value of '%s' is '%s'", domain = "R-DataEntry"),
                                  varnames[i], vattr[["min"]]))
-                focus(l[i-1, 2])
+                focus(ilist[[i-1]]) <- TRUE
                 return(invisible(NULL))
             }
             if(!is.na(vattr[["max"]]) && onerow[[i]] > vattr[["max"]]){
                 gmessage(sprintf(gettext("The maximum value of '%s' is '%s'", domain = "R-DataEntry"),
                                  varnames[i], vattr[["max"]]))
-                focus(l[i-1, 2])
+                focus(ilist[[i-1]]) <- TRUE
                 return(invisible(NULL))
             }
             if(!is.na(vattr[["valid.values"]][1])){
@@ -154,7 +153,7 @@ RowDlg <- function(newrow = TRUE)
                                              domain = "R-DataEntry"),
                                      varnames[i], onerow[[i]],
                                      paste(vattr[["valid.values"]], collapse = "\n")))
-                    focus(l[i-1, 2])
+                    focus(ilist[[i-1]]) <- TRUE
                     return(invisible(NULL))
                 }
             }
@@ -176,14 +175,10 @@ RowDlg <- function(newrow = TRUE)
         UpdateDFView()
         DEenv$ProjOpt$size.roww <- size(DEenv$roww)
         SaveProject()
-        dispose(DEenv$roww)
-        ## Instead of destroying the window, it would be better to clean the
-        ## edit boxes. However, the code below generates the error:
-        ## Gtk-CRITICAL **: IA__gtk_table_attach: assertion 'child->parent == NULL' failed
-        # for(i in 2:ncol(DEenv$Data)){
-        #     svalue(l[i-1, 2]) <- ""
-        # }
-        # focus(l[1, 2])
+        for(i in 2:ncol(DEenv$Data)){
+            svalue(ilist[[i-1]]) <- ""
+        }
+        focus(ilist[[1]]) <- TRUE
     }
 
     onBtCloseClick <- function(...)
@@ -209,5 +204,5 @@ RowDlg <- function(newrow = TRUE)
 
 
     visible(DEenv$roww) <- TRUE
-    focus(l[1, 2])
+    focus(ilist[[1]]) <- TRUE
 }

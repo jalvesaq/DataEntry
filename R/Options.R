@@ -2,7 +2,7 @@
 OptionsDlg <- function(...)
 {
     if(!is.null(DEenv$optw)){
-        focus(DEenv$optw)
+        focus(DEenv$optw) <- TRUE
         return(invisible(NULL))
     }
 
@@ -79,19 +79,19 @@ OptionsDlg <- function(...)
     SetOptions <- function(...)
     {
         if(!IsNumericInt(svalue(edNBcks), "integer")){
-            focus(edNBcks)
+            focus(edNBcks) <- TRUE
             return(invisible(NULL))
         }
         if(as.integer(svalue(edNBcks)) < 1){
             gmessage(gettext("Please, enter a positive integer number.",
                              domain = "R-DataEntry"), type = "warning")
-            focus(edNBcks)
+            focus(edNBcks) <- TRUE
             return(invisible(NULL))
         }
         if(!svalue(cbEmpty) && svalue(edMissV) == ""){
             gmessage(gettext("You must define the string representing missing values.",
                              domain = "R-DataEntry"), type = "warning")
-            focus(edMissV)
+            focus(edMissV) <- TRUE
             return(invisible(NULL))
         }
 
@@ -145,5 +145,5 @@ OptionsDlg <- function(...)
     addHandlerClicked(btOK, SetOptions)
     ShowHide()
     visible(DEenv$optw) <- TRUE
-    focus(btCancel)
+    focus(btCancel) <- TRUE
 }

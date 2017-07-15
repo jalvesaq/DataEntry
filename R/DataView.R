@@ -13,7 +13,7 @@ DataEntryDlg <- function(...)
     }
 
     if(!is.null(DEenv$dataw)){
-        focus(DEenv$dataw)
+        focus(DEenv$dataw) <- TRUE
         return(invisible(NULL))
     }
 
