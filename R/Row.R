@@ -175,10 +175,15 @@ RowDlg <- function(newrow = TRUE)
         UpdateDFView()
         DEenv$ProjOpt$size.roww <- size(DEenv$roww)
         SaveProject()
-        for(i in 2:ncol(DEenv$Data)){
-            svalue(ilist[[i-1]]) <- ""
+
+        if(svalue(btAdd) == gettext("Replace", domain = "R-DataEntry")){
+            dispose(DEenv$roww)
+        } else {
+            for(i in 2:ncol(DEenv$Data)){
+                svalue(ilist[[i-1]]) <- ""
+            }
+            focus(ilist[[1]]) <- TRUE
         }
-        focus(ilist[[1]]) <- TRUE
     }
 
     onBtCloseClick <- function(...)
