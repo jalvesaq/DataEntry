@@ -1,18 +1,18 @@
 
-data.frame2csv <- function(x, fname, fieldsep, how)
+data.frame2csv <- function(d, obname, fname, fieldsep, how)
 {
-    x.names <- names(x)
+    d.names <- names(d)
 
     if(how == "R"){
         sink(paste0(fname, ".R"))
-        cat('d <- read.table("', fname, '.csv", sep = "', fieldsep,
+        cat(obname, ' <- read.table("', fname, '.csv", sep = "', fieldsep,
             '", header = TRUE, as.is = TRUE)\n\n', sep = "")
-        for(column in x.names){
-            xx <- x[[column]]
+        for(column in d.names){
+            xx <- d[[column]]
             if(is.factor(xx)){
                 xx.levels <- gsub('"', '\\\\"', levels(xx))
                 n.levels <- length(xx.levels)
-                cat("d", "$", column, " <- factor(", "d", "$", column,
+                cat(obname, "$", column, " <- factor(", obname, "$", column,
                     ", levels = 1:", n.levels, ',\n  labels = c("', sep = "")
                 cat(xx.levels[1], '"', sep = "")
                 if(n.levels > 1) cat(", ")
@@ -33,15 +33,20 @@ data.frame2csv <- function(x, fname, fieldsep, how)
                 cat("))\n")
             }
         }
-        for(column in x.names){
-            xx <- x[[column]]
+        if(!is.null(attr(d, "variable.labels"))){
+            cat('\nattr(', obname, ', "variable.labels") <- ', sep = "")
+            dput(attr(d, "variable.labels"))
+            cat("\n")
+        }
+        for(column in d.names){
+            xx <- d[[column]]
             xx.label <- attr(xx, "label")
             if(!is.null(xx.label)){
-                cat("attr(", "d", "$", column, ', "label") <- "', xx.label,
+                cat("attr(", obname, "$", column, ', "label") <- "', xx.label,
                     '"\n', sep = "")
             }
         }
-        cat("save(", "d", ", file = \"", fname, ".RData\")\n", sep = "")
+        cat("save(", obname, ", file = \"", fname, ".RData\")\n", sep = "")
         sink()
     } else if(how == "SPSS"){
         sink(paste0(fname, ".sps"))
@@ -53,11 +58,15 @@ data.frame2csv <- function(x, fname, fieldsep, how)
         cat("  /ARRANGEMENT=DELIMITED\n")
         cat("  /FIRSTCASE=2\n")
         cat("  /VARIABLES=\n")
-        for(column in x.names){
+        for(column in d.names){
             cat("  ", column, " ", sep = "")
-            xx <- x[[column]]
-            if(is.character(xx)) cat("A", max(nchar(xx), na.rm = TRUE), "\n", sep = "")
-            else if(is.factor(xx)){
+            xx <- d[[column]]
+            if(is.character(xx)){
+                mnc <- max(nchar(xx), na.rm = TRUE)
+                if(mnc == 0)
+                    mnc <- 1
+                cat("A", mnc, "\n", sep = "")
+            } else if(is.factor(xx)){
                 nlevs <- length(levels(xx))
                 if(nlevs < 10) cat("F1.0\n")
                 else if(nlevs > 9 && nlevs < 100) cat("F2.0\n")
@@ -73,16 +82,16 @@ data.frame2csv <- function(x, fname, fieldsep, how)
         cat("  .\n")
         cat("EXECUTE.\n\n")
 
-        for(column in x.names){
-            xx <- x[[column]]
+        for(column in d.names){
+            xx <- d[[column]]
             xx.label <- attr(xx, "label")
             if(!is.null(xx.label))
                 cat("VARIABLE LABELS ", column, ' "', xx.label, '" .\n', sep = "")
         }
         cat("\n")
 
-        for(column in x.names){
-            xx <- x[[column]]
+        for(column in d.names){
+            xx <- d[[column]]
             if(is.factor(xx)){
                 cat("VALUE LABELS ", column, "\n", sep = "")
                 xx.levels <- levels(xx)
@@ -102,12 +111,12 @@ data.frame2csv <- function(x, fname, fieldsep, how)
     }
 
     if(how != "char"){
-        for(column in x.names)
-            if(is.factor(x[[column]])) x[[column]] <- as.numeric(x[[column]])
+        for(column in d.names)
+            if(is.factor(d[[column]])) d[[column]] <- as.numeric(d[[column]])
     }
 
     if(fieldsep == "\\t")
         fieldsep <- "\t"
-    write.table(x, file = paste0(fname, ".csv"), sep = fieldsep,
+    write.table(d, file = paste0(fname, ".csv"), sep = fieldsep,
                 col.names = TRUE, row.names = FALSE, na = "")
 }
