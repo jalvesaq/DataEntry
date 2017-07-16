@@ -22,18 +22,25 @@ ExportDlg <- function(...)
     cbExpid <- gcheckbox(gettext("Include the column \"id\"",
                                  domain = "R-DataEntry"), checked = DEenv$AppOpt$expid, container = g)
 
-    # TODO: Abbreviate the object name
-    nm <-  sub(".dte$", "", basename(DEenv$fpath))
-    nm <- gsub("[[:punct:]]", ".", nm)
-    nm <- gsub("[ \t]", ".", nm)
+    if(is.null(DEenv$ProjOpt$obname)){
+        obname <- NA
+        try(obname <- abbreviate(sub("\\....$", "", basename(DEenv$fpath)), 5),
+            silent = TRUE)
+        if(is.na(obname))
+            obname <- sub(".dte$", "", basename(DEenv$fpath))
+        obname <- gsub("[[:punct:]]", ".", obname)
+        obname <- gsub("[ \t]", ".", obname)
+        DEenv$ProjOpt$obname <- obname
+    }
 
     gon <- ggroup(container = g)
     lbObnm <- glabel(gettext("Object name:", domain = "R-DataEntry"), container = gon)
-    edObnm <- gedit(nm, width = 20, container = gon)
+    edObnm <- gedit(DEenv$ProjOpt$obname, width = 20, container = gon)
 
     gfn <- ggroup(container = g)
     lbFnm <- glabel(gettext("File name:", domain = "R-DataEntry"), container = gfn)
-    edFnm <- gedit(nm, width = 20, container = gfn)
+    edFnm <- gedit(sub(".dte$", "", basename(DEenv$fpath)),
+                   width = 20, container = gfn)
 
     gcsv <- ggroup(horizontal = FALSE, container = g)
     lbFac <- glabel(gettext("How to write factor variables?", domain = "R-DataEntry"),
@@ -87,8 +94,10 @@ ExportDlg <- function(...)
         DEenv$AppOpt$expsep <- svalue(rdExpsep, index = TRUE)
         DEenv$AppOpt$explbl <- svalue(rdExplbl, index = TRUE)
         DEenv$AppOpt$expid  <- svalue(cbExpid)
+        DEenv$ProjOpt$obname <- svalue(edObnm)
 
         SaveAppOpt()
+        SaveProject()
 
         d <- DEenv$Data
         if(!svalue(cbExpid))
@@ -104,12 +113,11 @@ ExportDlg <- function(...)
 
         if(DEenv$AppOpt$exphow == 1){
             fname <- paste0(dirname(DEenv$fpath), "/", svalue(edFnm))
-            obname <- svalue(edObnm)
             sep <- c(",", ";", "\\t")[DEenv$AppOpt$expsep]
             how <- c("char", "R", "SPSS")[DEenv$AppOpt$expfct]
             keepid <- svalue(cbExpid)
             dispose(DEenv$expw)
-            data.frame2csv(d, obname, fname, sep, how)
+            data.frame2csv(d, DEenv$ProjOpt$obname, fname, sep, how)
             if(how == "char")
                 msg <- sprintf(gettext("Data exported to \"%s\".",
                                        domain = "R-DataEntry"),
