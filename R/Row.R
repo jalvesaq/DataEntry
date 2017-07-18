@@ -86,10 +86,12 @@ RowDlg <- function(newrow = TRUE)
             onerow[1] <- DEenv$id
         }
         names(onerow) <- "id"
+
+        vlist <- sapply(ilist, svalue)
         varattr <- DEenv$VarAttr
         varnames <- names(DEenv$Data)
         for(i in 2:ncol(DEenv$Data)){
-            onerow[i] <- svalue(l[i-1, 2])
+            onerow[i] <- vlist[i-1]
             Encoding(onerow[[i]]) <- "UTF-8"
             vattr <- varattr[[varnames[i]]]
 
@@ -184,13 +186,16 @@ RowDlg <- function(newrow = TRUE)
         if(svalue(btAdd) == gettext("Replace", domain = "R-DataEntry")){
             dispose(DEenv$roww)
         } else {
+            visible(DEenv$roww) <- FALSE
             for(i in 2:ncol(DEenv$Data)){
                 if(tlist[i-1] == "E")
                     svalue(ilist[[i-1]]) <- ""
                 else
                     svalue(ilist[[i-1]], index = TRUE) <- 1
             }
+            # FIXME: Scroll DEenv$roww
             focus(ilist[[1]]) <- TRUE
+            visible(DEenv$roww) <- TRUE
         }
     }
 
