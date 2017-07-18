@@ -94,18 +94,18 @@ RowDlg <- function(newrow = TRUE)
             vattr <- varattr[[varnames[i]]]
 
             # NA value
-            if(onerow[i] == ""){
+            if(onerow[[i]] == DEenv$ProjOpt$missv){
+                onerow[[i]] <- NA
+            } else if(onerow[i] == ""){
                 if(DEenv$ProjOpt$emptycell){
                     onerow[[i]] <- NA
                 } else {
-                    gmessage(gettext("No cell might be left empty.",
-                                     domain = "R-DataEntry"))
+                    gmessage(paste0(varnames[i], ": "),
+                                    gettext("No cell might be left empty.",
+                                            domain = "R-DataEntry"))
                     focus(ilist[[i-1]])
                     return(invisible(NULL))
                 }
-            }
-            if(onerow[[i]] == DEenv$ProjOpt$missv){
-                onerow[[i]] <- NA
             }
             if(is.na(onerow[[i]])){
                 if(vattr[["class"]] == "factor")
