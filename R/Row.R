@@ -31,18 +31,21 @@ RowDlg <- function(newrow = TRUE)
     g <- ggroup(horizontal = FALSE, container = DEenv$roww, use.scrollwindow = TRUE)
     l <- glayout(container = g, expand = TRUE)
     ilist <- list()
+    tlist <- character()
 
     for(i in 2:ncol(DEenv$Data)){
         icol <- names(DEenv$Data)[i]
-        l[i-1, 1] <- paste0(icol, ":")
+        l[i-1, 1, expand = TRUE, anchor = c(-1, 1)] <- glabel(paste0(icol, ":"))
         if(newrow){
             if(DEenv$ProjOpt$droplist && !is.na(DEenv$VarAttr[[i]]$valid.values[1])){
                 if(DEenv$ProjOpt$emptycell)
                     ilist[[i-1]] <- gcombobox(c("", DEenv$VarAttr[[i]]$valid.values))
                 else
                     ilist[[i-1]] <- gcombobox(c("", DEenv$VarAttr[[i]]$valid.values, DEenv$ProjOpt$missv))
+                tlist[i-1] <- "C"
             } else {
                 ilist[[i-1]] <- gedit(width = 10)
+                tlist[i-1] <- "E"
             }
         } else {
             if(DEenv$ProjOpt$droplist && !is.na(DEenv$VarAttr[[i]]$valid.values[1])){
@@ -56,12 +59,14 @@ RowDlg <- function(newrow = TRUE)
                                             domain = "R-DataEntry"), srow[icol], icol))
                 }
                 ilist[[i-1]] <- gcombobox(items, selected = idx)
+                tlist[i-1] <- "C"
             } else {
                 ilist[[i-1]] <- gedit(srow[icol], width = 10)
+                tlist[i-1] <- "E"
             }
         }
         l[i-1, 2] <- ilist[[i-1]]
-        l[i-1, 3] <- DEenv$VarAttr[[icol]]$label
+        l[i-1, 3, expand = TRUE, anchor = c(-1, 1)] <- glabel(DEenv$VarAttr[[icol]]$label)
     }
     g1 <- ggroup(container = g)
     addSpring(g1)
@@ -180,7 +185,10 @@ RowDlg <- function(newrow = TRUE)
             dispose(DEenv$roww)
         } else {
             for(i in 2:ncol(DEenv$Data)){
-                svalue(ilist[[i-1]]) <- ""
+                if(tlist[i-1] == "E")
+                    svalue(ilist[[i-1]]) <- ""
+                else
+                    svalue(ilist[[i-1]], index = TRUE) <- 1
             }
             focus(ilist[[1]]) <- TRUE
         }
