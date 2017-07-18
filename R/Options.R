@@ -22,18 +22,18 @@ OptionsDlg <- function(...)
                 horizontal = FALSE, container = g)
     if(is.null(DEenv$ProjOpt)){
         cbDrop <- gcheckbox(gettext("Put valid values in dropdown list", domain = "R-DataEntry"),
-                            checked = DEenv$ProjOpt$droplist, container = p)
+                            checked = FALSE, container = p)
         cbEmpty <- gcheckbox(gettext("Allow blank cells", domain = "R-DataEntry"),
-                             checked = DEenv$ProjOpt$emptycell, container = p)
+                             checked = FALSE, container = p)
         gm <- ggroup(container = p)
         glabel(gettext("Text representing missing values: ", domain = "R-DataEntry"),
                container = gm, anchor = c(-1, 1))
         edMissV <- gedit("", width = 4, container = gm)
     } else {
         cbDrop <- gcheckbox(gettext("Put valid values in dropdown list", domain = "R-DataEntry"),
-                            checked = FALSE, container = p)
+                            checked = DEenv$ProjOpt$droplist, container = p)
         cbEmpty <- gcheckbox(gettext("Allow blank cells", domain = "R-DataEntry"),
-                             checked = FALSE, container = p)
+                             checked = DEenv$ProjOpt$emptycell, container = p)
         gm <- ggroup(container = p)
         glabel(gettext("Text representing missing values: ", domain = "R-DataEntry"),
                container = gm, anchor = c(-1, 1))
