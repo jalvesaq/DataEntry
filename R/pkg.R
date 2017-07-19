@@ -11,7 +11,8 @@ DEenv <- new.env()
                 startnow <- TRUE
         }
         if(startnow){
-            packageStartupMessage(paste0("\n",
+            packageStartupMessage(paste0("\nDataEntry ",
+                                         as.character(utils::packageVersion("DataEntry")), "\n",
                                          gettext("If necessary, type 'DataEntry()' to start the application again.",
                                                  domain = "R-DataEntry"), "\n"))
             DataEntry()
