@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DataEntry\n"
 "Report-Msgid-Bugs-To: https://github.com/jalvesaq/DataEntry/issues\n"
-"POT-Creation-Date: 2017-07-13 12:10\n"
-"PO-Revision-Date: 2017-07-13 12:12-0300\n"
+"POT-Creation-Date: 2017-07-18 23:11\n"
+"PO-Revision-Date: 2017-07-18 23:13-0300\n"
 "Last-Translator: Jakson Aquino <jalvesaq@gmail.com>\n"
 "Language-Team: pt <pt@li.org>\n"
 "Language: pt_BR\n"
@@ -96,9 +96,6 @@ msgstr "Nenhuma linha está selecionada."
 msgid "ID \"%d\" not found. Please, select an item."
 msgstr "ID \"%d\" não encontrado. Selecione um item."
 
-msgid "Data exported to \"%s\""
-msgstr "Dados exportados para \"%s\""
-
 msgid "Export data"
 msgstr "Exportar dados"
 
@@ -150,14 +147,23 @@ msgstr "Tab"
 msgid "What to do with variable labels?"
 msgstr "O que fazer com os rótulos das variáveis?"
 
-msgid "Nothing"
-msgstr "Nada"
+msgid "Add a \"label\" attribute to each column"
+msgstr "Adicione um atributo \"label\" a cada coluna"
 
 msgid "Add a \"variable.labels\" attribute to the data.frame"
 msgstr "Adicione um atributo \"variable.labels\" ao data.frame"
 
-msgid "Add a \"label\" attribute to each column"
-msgstr "Adicione um atributo \"label\" a cada coluna"
+msgid "Nothing"
+msgstr "Nada"
+
+msgid "Data exported to \"%s\"."
+msgstr "Dados exportados para \"%s\"."
+
+msgid "Data exported to \"%s\", and script generated as \"%s\"."
+msgstr "Dados exportados para \"%s\" e script gerado como \"%s\"."
+
+msgid "Data exported to \"%s\""
+msgstr "Dados exportados para \"%s\""
 
 msgid "New project"
 msgstr "Novo projeto"
@@ -186,6 +192,9 @@ msgstr "Permitir células em branco"
 msgid "Text representing missing values:"
 msgstr "Texto indicador de valores omissos:"
 
+msgid "Edit box width (number of characters):"
+msgstr "Largura da caixa de edição (número de caracteres:"
+
 msgid "Application options"
 msgstr "Opções do aplicativo"
 
@@ -203,6 +212,9 @@ msgstr "Número de cópias de segurança a manter:"
 
 msgid "Default"
 msgstr "Padrão"
+
+msgid "Please, enter a integer number between 1 and 999."
+msgstr "Por favor, digite um número inteiro entre 1 e 999."
 
 msgid "Please, enter a positive integer number."
 msgstr "Por favor, digite um número inteiro positivo."
@@ -300,6 +312,9 @@ msgid ""
 msgstr ""
 "Este arquivo é uma cópia de segurança.\n"
 "Se você realmente quer usá-lo, remova \"%s\" de seu nome."
+
+msgid "DataEntry"
+msgstr "DataEntry"
 
 msgid "If necessary, type 'DataEntry()' to start the application again."
 msgstr ""
