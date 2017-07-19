@@ -44,7 +44,7 @@ RowDlg <- function(newrow = TRUE)
                     ilist[[i-1]] <- gcombobox(c("", DEenv$VarAttr[[i]]$valid.values, DEenv$ProjOpt$missv))
                 tlist[i-1] <- "C"
             } else {
-                ilist[[i-1]] <- gedit(width = 10)
+                ilist[[i-1]] <- gedit(width = DEenv$ProjOpt$editwidth)
                 tlist[i-1] <- "E"
             }
         } else {
@@ -61,7 +61,7 @@ RowDlg <- function(newrow = TRUE)
                 ilist[[i-1]] <- gcombobox(items, selected = idx)
                 tlist[i-1] <- "C"
             } else {
-                ilist[[i-1]] <- gedit(srow[icol], width = 10)
+                ilist[[i-1]] <- gedit(srow[icol], width = DEenv$ProjOpt$editwidth)
                 tlist[i-1] <- "E"
             }
         }
@@ -102,9 +102,9 @@ RowDlg <- function(newrow = TRUE)
                 if(DEenv$ProjOpt$emptycell){
                     onerow[[i]] <- NA
                 } else {
-                    gmessage(paste0(varnames[i], ": "),
+                    gmessage(paste0(varnames[i], ": ",
                                     gettext("No cell might be left empty.",
-                                            domain = "R-DataEntry"))
+                                            domain = "R-DataEntry")))
                     focus(ilist[[i-1]])
                     return(invisible(NULL))
                 }
@@ -186,7 +186,6 @@ RowDlg <- function(newrow = TRUE)
         if(svalue(btAdd) == gettext("Replace", domain = "R-DataEntry")){
             dispose(DEenv$roww)
         } else {
-            visible(DEenv$roww) <- FALSE
             for(i in 2:ncol(DEenv$Data)){
                 if(tlist[i-1] == "E")
                     svalue(ilist[[i-1]]) <- ""
@@ -195,7 +194,6 @@ RowDlg <- function(newrow = TRUE)
             }
             # FIXME: Scroll DEenv$roww
             focus(ilist[[1]]) <- TRUE
-            visible(DEenv$roww) <- TRUE
         }
     }
 

@@ -99,7 +99,7 @@ GetAppOpt <- function()
 
 SetDefaultProjOpt <- function()
 {
-    po <- list("droplist" = FALSE, "emptycell" = FALSE, "missv" = "NA")
+    po <- list("droplist" = FALSE, "emptycell" = FALSE, "missv" = "NA", "editwidth" = 25)
 
     # Do not reset some options:
     if(!is.null(DEenv$ProjOpt$size.roww))
@@ -196,6 +196,8 @@ OpenProject <- function()
         SetDefaultProjOpt()
 
     # The Project options might have been saved by an outdated version of DataEntry
+    if(is.null(DEenv$editwidth))
+        DEenv$ProjOpt$editwidth <- 25
     if(is.null(DEenv$ProjOpt$droplist))
         DEenv$AppOpt$droplist <- FALSE
     if(is.null(DEenv$ProjOpt$emptycell))
