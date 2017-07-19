@@ -25,7 +25,7 @@ SetDefaultAppOpt <- function(clean = TRUE)
         DEenv$AppOpt <- list()
 
     if(is.null(DEenv$AppOpt$bckopen))
-        DEenv$AppOpt$bckopen <- TRUE
+        DEenv$AppOpt$bckopen <- FALSE
     if(is.null(DEenv$AppOpt$bcklast))
         DEenv$AppOpt$bcklast <- FALSE
     if(is.null(DEenv$AppOpt$nbcks))
