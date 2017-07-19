@@ -52,11 +52,13 @@ RowDlg <- function(newrow = TRUE)
                 items <- c("", as.character(DEenv$VarAttr[[i]]$valid.values))
                 if(!DEenv$ProjOpt$emptycell)
                     items <- c(items, DEenv$ProjOpt$missv)
-                idx <- grep(paste0("^", srow[icol], "$"), items)
-                if(idx < 1){
+                idx <- items %in% srow[icol]
+                if(sum(idx) < 1){
                     idx <- 1
                     warning(sprintf(gettext("Error trying to find \"%s\" as valid value of \"%s\".",
                                             domain = "R-DataEntry"), srow[icol], icol))
+                } else {
+                    idx <- grep(TRUE, idx)
                 }
                 ilist[[i-1]] <- gcombobox(items, selected = idx)
                 tlist[i-1] <- "C"
