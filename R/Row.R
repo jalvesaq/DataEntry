@@ -149,13 +149,13 @@ RowDlg <- function(newrow = TRUE)
                 return(invisible(NULL))
             }
             if(!is.na(vattr[["valid.values"]][1])){
-                is.valid <- FALSE
-                for(v in vattr[["valid.values"]])
-                    if(v == onerow[[i]]){
-                        is.valid <- TRUE
+                idx <- 0
+                for(idx in 1:length(vattr[["valid.values"]])){
+                    if(vattr[["valid.values"]][idx] == onerow[[i]]){
                         break
                     }
-                if(!is.valid){
+                }
+                if(idx == 0){
                     gmessage(sprintf(gettext("Invalid value for '%s': '%s'. Valid values are:\n%s",
                                              domain = "R-DataEntry"),
                                      varnames[i], onerow[[i]],
@@ -165,11 +165,10 @@ RowDlg <- function(newrow = TRUE)
                 }
             }
             if(vattr[["class"]] == "factor"){
-                lbl <- vattr[["valid.values"]]
-                if(length(lbl) > 0){
-                    onerow[[i]] <- factor(grep(paste0("^", onerow[[i]], "$"), lbl),
-                                          levels = 1:length(lbl),
-                                          labels = lbl)
+                if(length(vattr[["valid.values"]]) > 0){
+                    onerow[[i]] <- factor(idx,
+                                          levels = 1:length(vattr[["valid.values"]]),
+                                          labels = vattr[["valid.values"]])
                 }
             }
         }
