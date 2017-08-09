@@ -1,6 +1,11 @@
 
 AttrDlg <- function(newvar = TRUE)
 {
+    if(!newvar && !is.null(DEenv$Data) && nrow(DEenv$Data)){
+        gmessage(gettext("Data already entered might be lost if you change the attributes of variables.",
+                         domain = "R-DataEntry"), type = "warning")
+    }
+
     if(!is.null(DEenv$attrw)){
         focus(DEenv$attrw) <- TRUE
         return(invisible(NULL))

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DataEntry 0.9-2.9\n"
-"POT-Creation-Date: 2017-07-18 23:11\n"
+"POT-Creation-Date: 2017-08-08 21:17\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9,6 +9,9 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+
+msgid "Data already entered might be lost if you change the attributes of variables."
+msgstr ""
 
 msgid "Cannot edit 'id'."
 msgstr ""

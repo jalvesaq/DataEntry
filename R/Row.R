@@ -80,6 +80,15 @@ RowDlg <- function(newrow = TRUE)
 
     onBtAddClick <- function(...)
     {
+        ## This code to avoid users adding the same row twice does not work:
+        # if(!is.null(DEenv$addingRow) && DEenv$addingRow){
+        #     gmessage(gettext("The button was already pressed.", domain = "R-DataEntry"),
+        #              type = "warning")
+        #     return(invisible(NULL))
+        # }
+        # on.exit(DEenv$addingRow <- FALSE)
+        # DEenv$addingRow <- TRUE
+
         onerow <- list()
         if(!newrow){
             onerow[1] <- sid
